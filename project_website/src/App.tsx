@@ -5,6 +5,7 @@ import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { scroller, animateScroll as scroll } from "react-scroll";
 import { LoremIpsum, Avatar } from "react-lorem-ipsum";
+import GroupElement from "./GroupElement";
 
 // import NavDropdown from 'react-bootstrap/NavDropdown'
 // import Nav from 'react-bootstrap/Nav'
@@ -27,7 +28,7 @@ function App() {
 
         <Navbar.Brand href="#">
           <img src={logo} className="App-logo" alt="logo" />
-          IPM Project group 31
+            Group 31
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -50,7 +51,7 @@ function App() {
                 scroller.scrollTo("about", {
                   smooth: true,
                   offset: -70,
-                  duration: 800,
+                  duration: 70,
                 })
               }
             >
@@ -61,7 +62,7 @@ function App() {
                 scroller.scrollTo("assignments", {
                   smooth: true,
                   offset: -70,
-                  duration: 800,
+                  duration: 70,
                 })
               }
             >
@@ -72,7 +73,7 @@ function App() {
                 scroller.scrollTo("project", {
                   smooth: true,
                   offset: -70,
-                  duration: 800,
+                  duration: 70,
                 })
               }
             >
@@ -82,15 +83,23 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
 
-      <div id="about" style={{marginBottom : 700}}>
+      <div id="about" style={{paddingTop : 10}}>
         <div className="div1">
           <div className="section-title">
             <h4>About Us</h4>
             <h2>
-              <strong>Titulo do Project</strong> IPM
+              <strong>Group 31</strong>
             </h2>
           </div>
-          <LoremIpsum p={4} />
+          {/* <LoremIpsum p={4} /> */}
+          Hi there. We are the group 31 of IPM class and this is our web site. 
+          Here we present our assignments and project progress.
+          <div style={{display : "flex", justifyContent : "space-evenly", flexWrap: "wrap", marginTop : 50}}>
+            <GroupElement elementName="Bruno Carmo" elementNumber="57418"/>
+            <GroupElement elementName="Francisca Corga" elementNumber="58218"/>
+            <GroupElement elementName="Francisco Mateus" elementNumber="53270"/>
+            <GroupElement elementName="Sahil Kumar" elementNumber="57449"/>
+          </div>
         </div>
       </div>
       <div id="assignments">
