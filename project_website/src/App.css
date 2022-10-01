@@ -1,9 +1,10 @@
 .App {
   text-align: center;
+  background: white;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 50px;
   pointer-events: none;
 }
 
@@ -15,11 +16,11 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 50px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -35,4 +36,32 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.div1 {
+
+  border:1px solid black; 
+  
+  width: 80%;
+ 
+  -webkit-text-size-adjust: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+
+  font-family: 'Lato', sans-serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  color: #5a5a5a;
+
+  text-justify: auto;
+  text-align: left;
+  
+}
+
+
+#about, #assignments, #project {
+	padding: 80px 0;
 }
