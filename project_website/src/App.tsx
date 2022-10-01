@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { scroller, animateScroll as scroll } from "react-scroll";
 import { LoremIpsum, Avatar } from "react-lorem-ipsum";
 import GroupElement from "./GroupElement";
+import AssignmentContainer from "./AssignmentContainer";
 
 // import NavDropdown from 'react-bootstrap/NavDropdown'
 // import Nav from 'react-bootstrap/Nav'
@@ -27,8 +28,12 @@ function App() {
         </div> */}
 
         <Navbar.Brand href="#">
-          <img src={process.env.PUBLIC_URL + "/jackedUp.png"} className="App-logo" alt="logo" />
-            Group 31
+          <img
+            src={process.env.PUBLIC_URL + "/jackedUp.png"}
+            className="App-logo"
+            alt="logo"
+          />
+          Group 31
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -83,11 +88,10 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
 
-	  <img 
-	  	src={process.env.PUBLIC_URL + "/jackedUp.png"} 
-		style={{width : "100%", height : "100%"}}
-
-	  />
+      <img
+        src={process.env.PUBLIC_URL + "/jackedUp.png"}
+        style={{ width: "100%", height: "100%" }}
+      />
 
       <div id="about">
         <div className="div1">
@@ -98,40 +102,49 @@ function App() {
             </h2>
           </div>
           {/* <LoremIpsum p={4} /> */}
-          Hi there. We are the group 31 of IPM class and this is our web site. 
+          Hi there. We are the group 31 of IPM class and this is our web site.
           Here we present our assignments and project progress.
-          <div style={{display : "flex", justifyContent : "space-evenly", flexWrap: "wrap", marginTop : 50, gap: 25}}>
-            <GroupElement 
-                elementName="Bruno Carmo" 
-				elementNumber="57418" 
-				linkedinUrl="https://www.linkedin.com/"
-				githubUrl="https://github.com/"
-			/>
-            <GroupElement 
-				elementName="Francisca Corga" 
-				elementNumber="58218" 
-				linkedinUrl="https://www.linkedin.com/"
-				githubUrl="https://github.com/"
-			/>
-            <GroupElement 
-				elementName="Francisco Mateus" 
-				elementNumber="53270" 
-				profilePictureUrl="https://dub01pap003files.storage.live.com/y4m8_yABLOtHQp12DPFIEgwqEfIqS4ByHNaA4sIoW7aNbj7C3gUK--4cFLL3_frNd9fDLVM9UTj2dgb5WynU49r6NGTa1H7GjALxMf_b73oH1DZVgTIzTLZ-SUM3K1B0nlgTPt9kld0yYyXQcU_xpKOqVypkwLxICzqUrgxVS8bvy6DLLj41XJwCkqQY_eK5-Ul?width=2009&height=2015&cropmode=none"
-				linkedinUrl="https://www.linkedin.com/"
-				githubUrl="https://github.com/ftmateus"
-			/>
-            <GroupElement 
-				elementName="Sahil Kumar" 
-				elementNumber="57449" 
-				linkedinUrl="https://www.linkedin.com/"
-				githubUrl="https://github.com/"
-			/>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              flexWrap: "wrap",
+              marginTop: 50,
+              gap: 25,
+            }}
+          >
+            <GroupElement
+              elementName="Bruno Carmo"
+              elementNumber="57418"
+              linkedinUrl="https://www.linkedin.com/"
+              githubUrl="https://github.com/"
+            />
+            <GroupElement
+              elementName="Francisca Corga"
+              elementNumber="58218"
+              linkedinUrl="https://www.linkedin.com/"
+              githubUrl="https://github.com/"
+            />
+            <GroupElement
+              elementName="Francisco Mateus"
+              elementNumber="53270"
+              profilePictureUrl="https://dub01pap003files.storage.live.com/y4m8_yABLOtHQp12DPFIEgwqEfIqS4ByHNaA4sIoW7aNbj7C3gUK--4cFLL3_frNd9fDLVM9UTj2dgb5WynU49r6NGTa1H7GjALxMf_b73oH1DZVgTIzTLZ-SUM3K1B0nlgTPt9kld0yYyXQcU_xpKOqVypkwLxICzqUrgxVS8bvy6DLLj41XJwCkqQY_eK5-Ul?width=2009&height=2015&cropmode=none"
+              linkedinUrl="https://www.linkedin.com/"
+              githubUrl="https://github.com/ftmateus"
+            />
+            <GroupElement
+              elementName="Sahil Kumar"
+              elementNumber="57449"
+              linkedinUrl="https://www.linkedin.com/"
+              githubUrl="https://github.com/"
+            />
           </div>
         </div>
       </div>
       <div id="assignments">
-        <div className="div1" >
-          <LoremIpsum p={4} />
+        <div className="div1">
+          {/* <LoremIpsum p={4} /> */}
+          <AssignmentContainer name="The good and Bad" />
         </div>
       </div>
       <div id="project">
@@ -139,6 +152,11 @@ function App() {
           <LoremIpsum p={4} />
         </div>
       </div>
+		<footer style={{background : "black", color : "white"}}>
+			<img src={process.env.PUBLIC_URL + "/logo_nova-st_horiz_negativo.png"}
+				style={{ width : 200, height : 50, background : "white"}}
+			/>
+		</footer>
     </div>
   );
 }
