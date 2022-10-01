@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+.div1 {
+
+  border:1px solid black; 
+  
+  width: 80%;
+ 
+  -webkit-text-size-adjust: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+
+  font-family: 'Lato', sans-serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  color: #5a5a5a;
+
+  text-justify: auto;
+  text-align: left;
+  
+}
+
+
+#about, #assignments, #project {
+	padding: 80px 0;
+}
