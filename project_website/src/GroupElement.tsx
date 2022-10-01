@@ -18,18 +18,18 @@ export default function GroupElement({elementName, elementNumber, profilePicture
     return <>
         <div style={{width : PICTURE_SIZE}}>
             <img src={ profilePictureUrl}
-                style={{width : PICTURE_SIZE, height : PICTURE_SIZE}}
+                style={{width : PICTURE_SIZE, height : PICTURE_SIZE, borderRadius : 25}}
             />
             <p style={{textAlign : "center"}}>{ elementName }</p>
             <p style={{textAlign : "center"}}>{ elementNumber }</p>
             <div style={{display : "flex", justifyContent : "space-evenly", flexWrap: "wrap"}}>
                 {
                     githubUrl &&
-                    <SocialIcon network="github" url={githubUrl}/>
+                    <SocialIcon network="github" target="_blank" url={githubUrl}/>
                 }
                 {
                     linkedinUrl &&
-                    <SocialIcon network="linkedin" url={linkedinUrl}/>
+                    <SocialIcon network="linkedin" target="_blank" url={linkedinUrl}/>
                 }
             </div>
         </div>

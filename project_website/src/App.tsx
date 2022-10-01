@@ -16,7 +16,7 @@ function App() {
       <Navbar
         collapseOnSelect
         expand="lg"
-        bg="dark"
+        bg="black"
         variant="dark"
         sticky="top"
       >
@@ -27,7 +27,7 @@ function App() {
         </div> */}
 
         <Navbar.Brand href="#">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={process.env.PUBLIC_URL + "/jackedUp.png"} className="App-logo" alt="logo" />
             Group 31
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -83,6 +83,12 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
 
+	  <img 
+	  	src={process.env.PUBLIC_URL + "/jackedUp.png"} 
+		style={{width : "100%", height : "100%"}}
+
+	  />
+
       <div id="about">
         <div className="div1">
           <div className="section-title">
@@ -110,8 +116,9 @@ function App() {
             <GroupElement 
 				elementName="Francisco Mateus" 
 				elementNumber="53270" 
+				profilePictureUrl="https://dub01pap003files.storage.live.com/y4m8_yABLOtHQp12DPFIEgwqEfIqS4ByHNaA4sIoW7aNbj7C3gUK--4cFLL3_frNd9fDLVM9UTj2dgb5WynU49r6NGTa1H7GjALxMf_b73oH1DZVgTIzTLZ-SUM3K1B0nlgTPt9kld0yYyXQcU_xpKOqVypkwLxICzqUrgxVS8bvy6DLLj41XJwCkqQY_eK5-Ul?width=2009&height=2015&cropmode=none"
 				linkedinUrl="https://www.linkedin.com/"
-				githubUrl="https://github.com/"
+				githubUrl="https://github.com/ftmateus"
 			/>
             <GroupElement 
 				elementName="Sahil Kumar" 
