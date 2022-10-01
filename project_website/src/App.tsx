@@ -11,6 +11,15 @@ import AssignmentContainer from "./AssignmentContainer";
 // import NavDropdown from 'react-bootstrap/NavDropdown'
 // import Nav from 'react-bootstrap/Nav'
 
+function scrollToSection(section : string)
+{
+  scroller.scrollTo(section, {
+    smooth: true,
+    offset: -70,
+    duration: 70,
+  })
+}
+
 function App() {
   return (
     <div className="App">
@@ -29,7 +38,7 @@ function App() {
 
         <Navbar.Brand href="#">
           <img
-            src={process.env.PUBLIC_URL + "/jackedUp.png"}
+            src={process.env.PUBLIC_URL + "/GYM-1.png"}
             className="App-logo"
             alt="logo"
           />
@@ -53,33 +62,21 @@ function App() {
 
             <Nav.Link
               onClick={() =>
-                scroller.scrollTo("about", {
-                  smooth: true,
-                  offset: -70,
-                  duration: 70,
-                })
+                scrollToSection("about")
               }
             >
               About
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                scroller.scrollTo("assignments", {
-                  smooth: true,
-                  offset: -70,
-                  duration: 70,
-                })
+                scrollToSection("assignments")
               }
             >
               Assignments
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                scroller.scrollTo("project", {
-                  smooth: true,
-                  offset: -70,
-                  duration: 70,
-                })
+                scrollToSection("project")
               }
             >
               Project
