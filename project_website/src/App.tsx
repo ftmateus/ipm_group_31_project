@@ -87,12 +87,14 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
+      <div style={{backgroundColor:"black"}}>
       <img
         src={process.env.PUBLIC_URL + "/jackedUp.png"}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "50%", height: "20%"}}
       />
 
+      </div>
+      
       <div id="about">
         <div className="div1">
           <div className="section-title">
