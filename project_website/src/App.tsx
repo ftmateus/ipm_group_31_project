@@ -83,7 +83,7 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
 
-      <div id="about" style={{paddingTop : 10}}>
+      <div id="about">
         <div className="div1">
           <div className="section-title">
             <h4>About Us</h4>
@@ -94,16 +94,36 @@ function App() {
           {/* <LoremIpsum p={4} /> */}
           Hi there. We are the group 31 of IPM class and this is our web site. 
           Here we present our assignments and project progress.
-          <div style={{display : "flex", justifyContent : "space-evenly", flexWrap: "wrap", marginTop : 50}}>
-            <GroupElement elementName="Bruno Carmo" elementNumber="57418"/>
-            <GroupElement elementName="Francisca Corga" elementNumber="58218"/>
-            <GroupElement elementName="Francisco Mateus" elementNumber="53270"/>
-            <GroupElement elementName="Sahil Kumar" elementNumber="57449"/>
+          <div style={{display : "flex", justifyContent : "space-evenly", flexWrap: "wrap", marginTop : 50, gap: 25}}>
+            <GroupElement 
+                elementName="Bruno Carmo" 
+				elementNumber="57418" 
+				linkedinUrl="https://www.linkedin.com/"
+				githubUrl="https://github.com/"
+			/>
+            <GroupElement 
+				elementName="Francisca Corga" 
+				elementNumber="58218" 
+				linkedinUrl="https://www.linkedin.com/"
+				githubUrl="https://github.com/"
+			/>
+            <GroupElement 
+				elementName="Francisco Mateus" 
+				elementNumber="53270" 
+				linkedinUrl="https://www.linkedin.com/"
+				githubUrl="https://github.com/"
+			/>
+            <GroupElement 
+				elementName="Sahil Kumar" 
+				elementNumber="57449" 
+				linkedinUrl="https://www.linkedin.com/"
+				githubUrl="https://github.com/"
+			/>
           </div>
         </div>
       </div>
       <div id="assignments">
-        <div className="div1">
+        <div className="div1" >
           <LoremIpsum p={4} />
         </div>
       </div>
