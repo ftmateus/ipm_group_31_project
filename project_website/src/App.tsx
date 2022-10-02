@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Button, Modal, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { scroller, animateScroll as scroll } from "react-scroll";
 import { LoremIpsum, Avatar } from "react-lorem-ipsum";
@@ -11,16 +11,18 @@ import AssignmentContainer from "./AssignmentContainer";
 // import NavDropdown from 'react-bootstrap/NavDropdown'
 // import Nav from 'react-bootstrap/Nav'
 
-function scrollToSection(section : string)
-{
+function scrollToSection(section: string) {
   scroller.scrollTo(section, {
     smooth: true,
     offset: -70,
     duration: 70,
-  })
+  });
 }
 
 function App() {
+
+  const [showModalWindow, setShowModalWindow] = useState(false);
+
   return (
     <div className="App">
       <Navbar
@@ -60,38 +62,23 @@ function App() {
                 <Nav.Link eventKey="link-2">About us</Nav.Link>
               </Nav>*/}
 
-            <Nav.Link
-              onClick={() =>
-                scrollToSection("about")
-              }
-            >
-              About
-            </Nav.Link>
-            <Nav.Link
-              onClick={() =>
-                scrollToSection("assignments")
-              }
-            >
+            <Nav.Link onClick={() => scrollToSection("about")}>About</Nav.Link>
+            <Nav.Link onClick={() => scrollToSection("assignments")}>
               Assignments
             </Nav.Link>
-            <Nav.Link
-              onClick={() =>
-                scrollToSection("project")
-              }
-            >
+            <Nav.Link onClick={() => scrollToSection("project")}>
               Project
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <div style={{backgroundColor:"black"}}>
-      <img
-        src={process.env.PUBLIC_URL + "/jackedUp.png"}
-        style={{ width: "50%", height: "20%"}}
-      />
-
+      <div style={{ backgroundColor: "black" }}>
+        <img
+          src={process.env.PUBLIC_URL + "/jackedUp.png"}
+          style={{ width: "50%", height: "20%" }}
+        />
       </div>
-      
+
       <div id="about">
         <div className="div1">
           <div className="section-title">
@@ -143,7 +130,21 @@ function App() {
       <div id="assignments">
         <div className="div1">
           {/* <LoremIpsum p={4} /> */}
-          <AssignmentContainer name="The good and Bad" />
+          <AssignmentContainer name="The good and Bad" setShowModalWindow={setShowModalWindow}/>
+          <Modal show={showModalWindow} onHide={() => setShowModalWindow(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowModalWindow(false)}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={() => setShowModalWindow(false)}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
       <div id="project">
@@ -151,11 +152,12 @@ function App() {
           <LoremIpsum p={4} />
         </div>
       </div>
-		<footer style={{background : "black", color : "white"}}>
-			<img src={process.env.PUBLIC_URL + "/logo_nova-st_horiz_negativo.png"}
-				style={{ width : 200, height : 50, background : "white"}}
-			/>
-		</footer>
+      <footer style={{ background: "black", color: "white" }}>
+        <img
+          src={process.env.PUBLIC_URL + "/logo_nova-st_horiz_negativo.png"}
+          style={{ width: 200, height: 50, background: "white" }}
+        />
+      </footer>
     </div>
   );
 }
