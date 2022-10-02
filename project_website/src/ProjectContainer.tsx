@@ -4,42 +4,39 @@ import { Button, Modal } from "react-bootstrap";
 type ProjectContainerProps = {
   name: string;
   children: any;
+  pdfUrl : string;
   // setShowModalWindow : React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export default function ProjectContainer({
   name,
   children,
+  pdfUrl
 }: ProjectContainerProps) {
-  const [showModalWindow, setShowModalWindow] = useState(false);
+  const [show, setShow] = useState(false);
 
-  const handleShow = () => setShowModalWindow(true)
-  const handleClose = () => setShowModalWindow(false)
+  //const handleShow = () => setShow(true)
+  //const handleClose = () => setShow(false)
 
+  function openPdf()
+  {
+    window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+  }
+  
   return (
     <>
       <button
-        style={{
-          backgroundColor: "red",
-          width: "100%",
-          height: 100,
-          borderRadius: 25,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onClick={handleShow}
+        className="projectBtn"
+        onClick={openPdf}
       >
-        <h1 style={{}}>{name}</h1>
-        <Modal
-          show={showModalWindow}
-          onHide={() => handleClose}
+        <h1 style={{}}>{name}: Project Proposal</h1>
+        {/* <Modal
+          show={show}
+          onHide={handleClose}
           centered
           size="lg"
         >
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
+          
           <Modal.Body>
             { children() }
           </Modal.Body>
@@ -50,8 +47,8 @@ export default function ProjectContainer({
                 <Button variant="primary" onClick={() => setShowModalWindow(false)}>
                     Save Changes
                 </Button> */}
-          </Modal.Footer>
-        </Modal>
+          {/* </Modal.Footer>
+        </Modal> */}
         {children}
       </button>
     </>

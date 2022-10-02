@@ -127,27 +127,27 @@ function App() {
       </div>
       <div id="assignments">
         <div className="div1">
-          <h2>Projects</h2>
+          <h2>Assignments</h2>
           {/* <LoremIpsum p={4} /> */}
-          <AssignmentContainer name="The good and Bad">
-				<h2>The good and Bad</h2>
-		  </AssignmentContainer>
+          {/* <AssignmentContainer name="The good and Bad"> */}
+				{/* <h2>The good and Bad</h2>
+		  </AssignmentContainer> */}
         </div>
       </div>
       <div id="project">
         <div className="div1">
           <div className="section-title">
-            <h2>Projects</h2>
+            <h2>Project</h2>
           </div>
-          <ProjectContainer name="Stage 1">
-			{
-				() => <iframe
-					src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
-					width="100%"
-					height="500px"
-					style={{position : "relative"}}
-					></iframe>
-			}
+          <ProjectContainer name="Stage 1" pdfUrl={process.env.PUBLIC_URL + "/stage1_report.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
           </ProjectContainer>
         </div>
       </div>
