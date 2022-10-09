@@ -139,7 +139,18 @@ function App() {
           <div className="section-title">
             <h2>Project</h2>
           </div>
-          <ProjectContainer name="Stage 1" pdfUrl={process.env.PUBLIC_URL + "/stage1_report.pdf"}>
+          <ProjectContainer name="Stage 1: Project Proposal" pdfUrl={process.env.PUBLIC_URL + "/stage1_report.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          <ProjectContainer name="Stage 2: User and Task Analysis" pdfUrl={process.env.PUBLIC_URL + "/stage2_report.pdf"}>
           {/* {
             () => <iframe
               src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
@@ -150,6 +161,7 @@ function App() {
           } */}
           </ProjectContainer>
         </div>
+        
       </div>
       <footer style={{ background: "black", color: "white" }}>
         <img

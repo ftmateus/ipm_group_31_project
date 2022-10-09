@@ -29,7 +29,7 @@ export default function ProjectContainer({
         className="projectBtn"
         onClick={openPdf}
       >
-        <h1 style={{}}>{name}: Project Proposal</h1>
+        <h1 style={{}}>{name}</h1>
         {/* <Modal
           show={show}
           onHide={handleClose}
