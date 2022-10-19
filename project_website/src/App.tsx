@@ -129,6 +129,19 @@ function App() {
         <div className="div1">
           <h2>Assignment 1</h2>
           <div>
+          <ProjectContainer name="Bruno Carmo" pdfUrl={process.env.PUBLIC_URL + "/Assignment1_Bruno_Carmo_57418.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          </div>
+          <div>
           <ProjectContainer name="Sahil Kumar" pdfUrl={process.env.PUBLIC_URL + "/Assignment1_Sahil_Kumar.pdf"}>
           {/* {
             () => <iframe
