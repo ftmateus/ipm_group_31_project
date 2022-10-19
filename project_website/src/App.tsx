@@ -62,7 +62,7 @@ function App() {
 
             <Nav.Link onClick={() => scrollToSection("about")}>About</Nav.Link>
             <Nav.Link onClick={() => scrollToSection("assignments")}>
-              Assignments
+              Assignment 1 
             </Nav.Link>
             <Nav.Link onClick={() => scrollToSection("project")}>
               Project
@@ -127,7 +127,20 @@ function App() {
       </div>
       <div id="assignments">
         <div className="div1">
-          <h2>Assignments</h2>
+          <h2>Assignment 1</h2>
+          <div>
+          <ProjectContainer name="Sahil Kumar" pdfUrl={process.env.PUBLIC_URL + "/Assignment1_Sahil_Kumar.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          </div>
           {/* <LoremIpsum p={4} /> */}
           {/* <AssignmentContainer name="The good and Bad"> */}
 				{/* <h2>The good and Bad</h2>
