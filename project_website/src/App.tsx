@@ -7,6 +7,7 @@ import { scroller, animateScroll as scroll } from "react-scroll";
 import { LoremIpsum, Avatar } from "react-lorem-ipsum";
 import GroupElement from "./GroupElement";
 import AssignmentContainer from "./AssignmentContainer";
+import ProjectContainer from "./ProjectContainer";
 
 // import NavDropdown from 'react-bootstrap/NavDropdown'
 // import Nav from 'react-bootstrap/Nav'
@@ -20,9 +21,6 @@ function scrollToSection(section: string) {
 }
 
 function App() {
-
-  const [showModalWindow, setShowModalWindow] = useState(false);
-
   return (
     <div className="App">
       <Navbar
@@ -64,7 +62,7 @@ function App() {
 
             <Nav.Link onClick={() => scrollToSection("about")}>About</Nav.Link>
             <Nav.Link onClick={() => scrollToSection("assignments")}>
-              Assignments
+              Assignment 1 
             </Nav.Link>
             <Nav.Link onClick={() => scrollToSection("project")}>
               Project
@@ -82,7 +80,7 @@ function App() {
       <div id="about">
         <div className="div1">
           <div className="section-title">
-            <h4>About Us</h4>
+            <h2>About Us</h2>
             <h2>
               <strong>Group 31</strong>
             </h2>
@@ -129,28 +127,67 @@ function App() {
       </div>
       <div id="assignments">
         <div className="div1">
+          <h2>Assignment 1</h2>
+          <div>
+          <ProjectContainer name="Bruno Carmo" pdfUrl={process.env.PUBLIC_URL + "/Assignment1_Bruno_Carmo_57418.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          </div>
+          <div>
+          <ProjectContainer name="Sahil Kumar" pdfUrl={process.env.PUBLIC_URL + "/Assignment1_Sahil_Kumar.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          </div>
           {/* <LoremIpsum p={4} /> */}
-          <AssignmentContainer name="The good and Bad" setShowModalWindow={setShowModalWindow}/>
-          <Modal show={showModalWindow} onHide={() => setShowModalWindow(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowModalWindow(false)}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={() => setShowModalWindow(false)}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          {/* <AssignmentContainer name="The good and Bad"> */}
+				{/* <h2>The good and Bad</h2>
+		  </AssignmentContainer> */}
         </div>
       </div>
       <div id="project">
         <div className="div1">
-          <LoremIpsum p={4} />
+          <div className="section-title">
+            <h2>Project</h2>
+          </div>
+          <ProjectContainer name="Stage 1: Project Proposal" pdfUrl={process.env.PUBLIC_URL + "/stage1_report.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          <ProjectContainer name="Stage 2: User and Task Analysis" pdfUrl={process.env.PUBLIC_URL + "/stage2_report.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
         </div>
+        
       </div>
       <footer style={{ background: "black", color: "white" }}>
         <img
