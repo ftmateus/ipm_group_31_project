@@ -140,6 +140,19 @@ function App() {
           } */}
           </ProjectContainer>
           &nbsp;
+          <div>
+          <ProjectContainer name="Francisco Mateus" pdfUrl={process.env.PUBLIC_URL + "/Assignment1_Francisco_Mateus_53270.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          </div>
           </div>
           <div>
           <ProjectContainer name="Sahil Kumar" pdfUrl={process.env.PUBLIC_URL + "/Assignment1_Sahil_Kumar.pdf"}>
@@ -154,19 +167,7 @@ function App() {
           </ProjectContainer>
           &nbsp;
           </div>
-          <div>
-          <ProjectContainer name="Francisco Mateus" pdfUrl={process.env.PUBLIC_URL + "/Assignment1_Francisco_Mateus_53270.pdf"}>
-          {/* {
-            () => <iframe
-              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
-              width="100%"
-              height="500px"
-              style={{position : "relative"}}
-              ></iframe>
-          } */}
-          </ProjectContainer>
-          &nbsp;
-          </div>
+          
           {/* <LoremIpsum p={4} /> */}
           {/* <AssignmentContainer name="The good and Bad"> */}
 				{/* <h2>The good and Bad</h2>
@@ -199,6 +200,18 @@ function App() {
               ></iframe>
           } */}
           </ProjectContainer>
+          &nbsp;
+          <ProjectContainer name="Stage 3: First Prototype" pdfUrl={process.env.PUBLIC_URL + "/stage3_report.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
         </div>
         
       </div>
