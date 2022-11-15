@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
-
 void main() {
   runApp(const MyApp());
 }
@@ -19,11 +17,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Book Services',
-        theme: ThemeData(colorSchemeSeed: const Color(0xff3b01f8), useMaterial3: true),
-        home: Services());
+        theme: ThemeData(
+            colorSchemeSeed: const Color(0xff3b01f8), useMaterial3: true),
+        home: const Services());
   }
 }
 
@@ -82,9 +81,11 @@ class _ServicesState extends State<Services> {
                           contentPadding: const EdgeInsets.only(
                               left: 20, top: 5, bottom: 5),
                           onTap: () async {
-                            final date  = await _showReservationPicker(context, titles[index]);
-                            if(date==null) return;
-                            setState(() => reservations.add(Pair(date, titles[index])));
+                            final date = await _showReservationPicker(
+                                context, titles[index]);
+                            if (date == null) return;
+                            setState(() =>
+                                reservations.add(Pair(date, titles[index])));
                           },
                           title: Text(titles[index]),
                           leading:
@@ -126,30 +127,30 @@ class _ServicesState extends State<Services> {
         itemBuilder: (BuildContext context, int i) {
           return ListTile(
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text('${reservations[i].b} ', style: const TextStyle(fontWeight: FontWeight.bold)),
-                  Text('${reservations[i].a.day}/${reservations[i].a.month}/${reservations[i].a.year}'),
-                  Text(DateFormat.Hm().format(reservations[i].a))
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text('${reservations[i].b} ',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                  '${reservations[i].a.day}/${reservations[i].a.month}/${reservations[i].a.year}'),
+              Text(DateFormat.Hm().format(reservations[i].a))
             ],
           ));
         },
       ),
     );
   }
-
-
 }
 
 Future<DateTime?> _showReservationPicker(
     BuildContext context, String bookName) async {
   DateTime dateTime = DateTime.now();
   List<DateTime> availHours = <DateTime>[
-    DateTime(1999,1,1, 9,30),
-    DateTime(1999,1,1, 10,45),
-    DateTime(1999,1,1, 18,15),
-    DateTime(1999,1,1, 19,00),
-    DateTime(1999,1,1, 19,45)
+    DateTime(1999, 1, 1, 9, 30),
+    DateTime(1999, 1, 1, 10, 45),
+    DateTime(1999, 1, 1, 18, 15),
+    DateTime(1999, 1, 1, 19, 00),
+    DateTime(1999, 1, 1, 19, 45)
   ];
 
   DateTime selectedHour = availHours.first;
@@ -191,7 +192,7 @@ Future<DateTime?> _showReservationPicker(
                     icon: const Icon(Icons.calendar_month),
                   ),
                   const SizedBox(height: 20),
-                  Row(children:  <Widget>[
+                  Row(children: <Widget>[
                     const Icon(Icons.schedule),
                     const SizedBox(width: 10),
                     DropdownButton<DateTime>(
@@ -202,14 +203,14 @@ Future<DateTime?> _showReservationPicker(
                           selectedHour = value!;
                         });
                       },
-                      items: availHours.map<DropdownMenuItem<DateTime>>((DateTime value) {
+                      items: availHours
+                          .map<DropdownMenuItem<DateTime>>((DateTime value) {
                         return DropdownMenuItem<DateTime>(
                           value: value,
                           child: Text(DateFormat.Hm().format(value)),
                         );
                       }).toList(),
-                  )
-
+                    )
                   ])
                 ]),
             actions: <Widget>[
@@ -219,13 +220,30 @@ Future<DateTime?> _showReservationPicker(
               ),
               TextButton(
                   onPressed: () {
-                    dateTime = DateTime(dateTime.year, dateTime.month, dateTime.day, selectedHour.hour, selectedHour.minute);
+                    dateTime = DateTime(dateTime.year, dateTime.month,
+                        dateTime.day, selectedHour.hour, selectedHour.minute);
+
+                    final snackBar = SnackBar(
+                      content:  Row(children: <Widget>[
+                        const Icon (Icons.done, color: Colors.white),
+                        const SizedBox(width: 10),
+                        Text('Booked a service for $bookName !')]),
+                      duration: const Duration(milliseconds: 1500),
+                      behavior: SnackBarBehavior.floating,
+                      elevation: 6,
+                      width: 280.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                        backgroundColor: Colors.lightGreen,
+                    );
+
                     Navigator.of(context).pop(dateTime);
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                   child: const Text('Book'))
             ],
           );
         });
       });
-
 }
