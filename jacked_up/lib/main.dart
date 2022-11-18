@@ -1,188 +1,161 @@
-// Copyright 2019 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/gallery_localizations.dart';
 
-class BottomAppBarDemo extends StatefulWidget {
-  const BottomAppBarDemo({Key? key}) : super(key: key);
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  static const String _title = 'Flutter Code Sample';
 
   @override
-  State createState() => _BottomAppBarDemoState();
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: _title,
+      home: MyStatefulWidget(),
+    );
+  }
 }
 
-class _BottomAppBarDemoState extends State<BottomAppBarDemo>
-    with RestorationMixin {
-  final RestorableBool _showFab = RestorableBool(true);
-  final RestorableBool _showNotch = RestorableBool(true);
-  final RestorableInt _currentFabLocation = RestorableInt(0);
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({super.key});
 
   @override
-  String get restorationId => 'bottom_app_bar_demo';
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
 
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(_showFab, 'show_fab');
-    registerForRestoration(_showNotch, 'show_notch');
-    registerForRestoration(_currentFabLocation, 'fab_location');
-  }
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int _selectedIndex = 0;
+  final ScrollController _homeController = ScrollController();
 
-  @override
-  void dispose() {
-    _showFab.dispose();
-    _showNotch.dispose();
-    _currentFabLocation.dispose();
-    super.dispose();
-  }
-
-  // Since FloatingActionButtonLocation is not an enum, the index of the
-  // selected FloatingActionButtonLocation is used for state restoration.
-  static const List<FloatingActionButtonLocation> _fabLocations = [
-    FloatingActionButtonLocation.endDocked,
-    FloatingActionButtonLocation.centerDocked,
-    FloatingActionButtonLocation.endFloat,
-    FloatingActionButtonLocation.centerFloat,
-  ];
-
-  void _onShowNotchChanged(bool value) {
-    setState(() {
-      _showNotch.value = value;
-    });
-  }
-
-  void _onShowFabChanged(bool value) {
-    setState(() {
-      _showFab.value = value;
-    });
-  }
-
-  void _onFabLocationChanged(int? value) {
-    setState(() {
-      _currentFabLocation.value = value!;
-    });
+  Widget _listViewBody() {
+    return GridView.count(
+      primary: false,
+      padding: const EdgeInsets.all(20),
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      crossAxisCount: 2,
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.all(8),
+          color: Colors.orange,
+          child: const Center(
+            child : Text("Book Services",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 40,
+              ),
+            )
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8),
+          color: Colors.orange,
+          child: const Center(
+              child : Text("Routines",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 40,
+                ),
+              )
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8),
+          color: Colors.orange,
+          child: const Center(
+              child : Text("Training plans",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 40,
+              ),)
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8),
+          color: Colors.orange,
+          child: const Center(
+              child : Text("Exercises",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 40,
+              ),)
+          ),
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final localizations = GalleryLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(localizations.demoBottomAppBarTitle),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.only(bottom: 88),
-        children: [
-          SwitchListTile(
-            title: Text(
-              localizations.demoFloatingButtonTitle,
-            ),
-            value: _showFab.value,
-            onChanged: _onShowFabChanged,
+      body: _listViewBody(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.qr_code),
+            label: 'Gym key',
           ),
-          SwitchListTile(
-            title: Text(localizations.bottomAppBarNotch),
-            value: _showNotch.value,
-            onChanged: _onShowNotchChanged,
+          BottomNavigationBarItem(
+            icon: Icon(Icons.play_arrow),
+            label: 'Today\'s plan',
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(localizations.bottomAppBarPosition),
-          ),
-          RadioListTile<int>(
-            title: Text(
-              localizations.bottomAppBarPositionDockedEnd,
-            ),
-            value: 0,
-            groupValue: _currentFabLocation.value,
-            onChanged: _onFabLocationChanged,
-          ),
-          RadioListTile<int>(
-            title: Text(
-              localizations.bottomAppBarPositionDockedCenter,
-            ),
-            value: 1,
-            groupValue: _currentFabLocation.value,
-            onChanged: _onFabLocationChanged,
-          ),
-          RadioListTile<int>(
-            title: Text(
-              localizations.bottomAppBarPositionFloatingEnd,
-            ),
-            value: 2,
-            groupValue: _currentFabLocation.value,
-            onChanged: _onFabLocationChanged,
-          ),
-          RadioListTile<int>(
-            title: Text(
-              localizations.bottomAppBarPositionFloatingCenter,
-            ),
-            value: 3,
-            groupValue: _currentFabLocation.value,
-            onChanged: _onFabLocationChanged,
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message),
+            label: 'Message PM',
           ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: (int index) {
+          switch (index) {
+            case 0:
+              showModal(context);
+            // only scroll to top when current index is selected.
+
+              break;
+            case 1:
+              if (_selectedIndex == index) {
+                _homeController.animateTo(
+                  0.0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeOut,
+                );
+              }
+              break;
+            case 2:
+              if (_selectedIndex == index) {
+                _homeController.animateTo(
+                  0.0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeOut,
+                );
+              }
+              break;
+          }
+          setState(
+                () {
+              _selectedIndex = index;
+            },
+          );
+        },
       ),
-      floatingActionButton: _showFab.value
-          ? FloatingActionButton(
-        onPressed: () {},
-        tooltip: localizations.buttonTextCreate,
-        child: const Icon(Icons.add),
-      )
-          : null,
-      floatingActionButtonLocation: _fabLocations[_currentFabLocation.value],
-      bottomNavigationBar: _DemoBottomAppBar(
-        fabLocation: _fabLocations[_currentFabLocation.value],
-        shape: _showNotch.value ? const CircularNotchedRectangle() : null,
+    );
+  }
+
+  void showModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        content: const Text('Example Dialog'),
+        actions: <TextButton>[
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Close'),
+          )
+        ],
       ),
     );
   }
 }
-
-class _DemoBottomAppBar extends StatelessWidget {
-  const _DemoBottomAppBar({
-    required this.fabLocation,
-    this.shape,
-  });
-
-  final FloatingActionButtonLocation fabLocation;
-  final NotchedShape? shape;
-
-  static final centerLocations = <FloatingActionButtonLocation>[
-    FloatingActionButtonLocation.centerDocked,
-    FloatingActionButtonLocation.centerFloat,
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    final localizations = GalleryLocalizations.of(context)!;
-    return BottomAppBar(
-      shape: shape,
-      child: IconTheme(
-        data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
-        child: Row(
-          children: [
-            IconButton(
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
-            ),
-            if (centerLocations.contains(fabLocation)) const Spacer(),
-            IconButton(
-              tooltip: localizations.starterAppTooltipSearch,
-              icon: const Icon(Icons.search),
-              onPressed: () {},
-            ),
-            IconButton(
-              tooltip: localizations.starterAppTooltipFavorite,
-              icon: const Icon(Icons.favorite),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
