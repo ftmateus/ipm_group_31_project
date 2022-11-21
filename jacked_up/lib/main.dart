@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jacked_up/MenuOptions.dart';
+import 'package:jacked_up/ProfileButton.dart';
 
 void main() => runApp(const MyApp());
 
@@ -28,59 +30,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final ScrollController _homeController = ScrollController();
 
   Widget _listViewBody() {
-    return GridView.count(
-      primary: false,
-      padding: const EdgeInsets.all(20),
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      crossAxisCount: 2,
+    return Column(
       children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(8),
-          color: Colors.orange,
-          child: const Center(
-            child : Text("Book Services",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 40,
-              ),
-            )
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          color: Colors.orange,
-          child: const Center(
-              child : Text("Routines",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 40,
-                ),
-              )
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          color: Colors.orange,
-          child: const Center(
-              child : Text("Training plans",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 40,
-              ),)
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          color: Colors.orange,
-          child: const Center(
-              child : Text("Exercises",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 40,
-              ),)
-          ),
-        ),
+        ProfileButton(index: 0, onPress: () => {}),
+        MenuOptions(index: 0, onPress: () => {})
       ],
     );
   }
@@ -110,7 +63,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           switch (index) {
             case 0:
               showModal(context);
-            // only scroll to top when current index is selected.
+              // only scroll to top when current index is selected.
 
               break;
             case 1:
@@ -133,7 +86,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               break;
           }
           setState(
-                () {
+            () {
               _selectedIndex = index;
             },
           );
