@@ -2,16 +2,60 @@ import 'package:flutter/material.dart';
 
 import 'BookService.dart';
 
+class MenuOption extends StatelessWidget
+{
+  const MenuOption({
+    super.key,
+    required this.title,
+    required this.image,
+    required this.onPress
+  });
+
+
+  final String image;
+  final String title;
+  final void Function() onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          image: DecorationImage(
+            image: AssetImage(image),
+          )
+      ),
+      child: Material(
+          color: Colors.black.withOpacity(0.4),
+          borderRadius: BorderRadius.circular(30),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(30),
+            splashColor: Colors.amberAccent.withAlpha(80),
+            onTap: onPress,
+            child: Center(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
+                )
+            ),
+          )
+      ),
+    );
+  }
+}
+
 class MenuOptions extends StatelessWidget
 {
   const MenuOptions({
     super.key,
     required this.index,
-    required this.onPress,
   });
 
   final int index;
-  final void Function() onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -23,82 +67,28 @@ class MenuOptions extends StatelessWidget
           mainAxisSpacing: 10,
           crossAxisCount: 2,
           children: <Widget>[
-            Material(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(30),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(30),
-                  splashColor: Colors.amberAccent.withAlpha(80),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Services()),
-                    );
-                  },
-                  child: const Center(
-                      child: Text(
-                        "Book Services",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
-                      )
-                  ),
-                )
+            MenuOption(title: "Book Services",
+                image: 'assets/images/book_service_main_menu_icon.png',
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Services()),
+                  );
+                }
             ),
-            Material(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(30),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(30),
-                  splashColor: Colors.amberAccent.withAlpha(80),
-                  onTap: () {},
-                  child: const Center(
-                      child: Text(
-                        "Routines",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
-                      )
-                  ),
-                )
+            MenuOption(
+                title: "Routines",
+                image: 'assets/images/routine_main_menu_icon.jpg',
+                onPress: () {}
             ),
-            Material(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(30),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(30),
-                  splashColor: Colors.amberAccent.withAlpha(80),
-                  onTap: () {},
-                  child: const Center(
-                      child: Text(
-                        "Training plans",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
-                      )
-                  ),
-                )
-            ),
-            Material(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(30),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(30),
-                  splashColor: Colors.amberAccent.withAlpha(80),
-                  onTap: () {},
-                  child: const Center(
-                      child: Text(
-                        "Exercises",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
-                      )
-                  ),
-                )
+            MenuOption(
+                title: "Training plans",
+                image: 'assets/images/training_plan_main_menu_icon.jpg',
+                onPress: () {}
+            ),MenuOption(
+                title: "Exercises",
+                image: 'assets/images/exercises_main_menu_icon.jpg',
+                onPress: () {}
             ),
           ],
         )

@@ -17,7 +17,7 @@ class ProfileButton extends StatelessWidget
     return Container(
       padding: const EdgeInsets.all(20),
       child: Material(
-          color: Colors.blue.shade400,
+          color: Color.fromRGBO(85, 122, 250, 1),
           borderRadius: BorderRadius.circular(30),
           type: MaterialType.button,
           child: InkWell(
@@ -34,7 +34,10 @@ class ProfileButton extends StatelessWidget
               child: Center(
                   child: Column(
                     children: [
-                      const Icon(Icons.person, size: 80),
+                      CircleAvatar(
+                        radius: 48,
+                        backgroundImage: AssetImage("images/fctense_profile_picture.png"),
+                      ), // const Icon(Icons.person, size: 80),
                       const Text(
                         "Welcome FCTense",
                         textAlign: TextAlign.center,

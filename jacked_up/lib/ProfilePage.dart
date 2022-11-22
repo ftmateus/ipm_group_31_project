@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Center(
               child: Column(
                 children: [
-                  const Icon(Icons.person, size: 160),
+                  const Icon(Icons.person, size: 120),
                   const Text("FCTense",
                     style: TextStyle(
                         fontSize: 42

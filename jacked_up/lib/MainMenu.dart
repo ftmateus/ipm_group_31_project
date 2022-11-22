@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jacked_up/MenuOptions.dart';
 import 'package:jacked_up/ProfileButton.dart';
 
+import 'GymKey.dart';
+
 void main() => runApp(const MainMenu());
 
 class MainMenu extends StatelessWidget {
@@ -33,7 +35,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Column(
       children: <Widget>[
         ProfileButton(index: 0, onPress: () => {}),
-        MenuOptions(index: 0, onPress: () => {})
+        MenuOptions(index: 0)
       ],
     );
   }
@@ -42,7 +44,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _listViewBody(),
+      backgroundColor: Colors.black87,
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        backgroundColor: Colors.black87,
+        selectedItemColor: Color.fromRGBO(85, 122, 250, 1),
+        iconSize: 42,
+        unselectedItemColor: Colors.grey,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.qr_code),
@@ -57,8 +65,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Message PM',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+
         onTap: (int index) {
           switch (index) {
             case 0:
@@ -99,7 +106,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        content: const Text('Example Dialog'),
+        content: GymKey(index: 0, onPress : () {}),
         actions: <TextButton>[
           TextButton(
             onPressed: () {
