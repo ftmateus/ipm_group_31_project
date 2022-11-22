@@ -85,9 +85,15 @@ class MenuOptions extends StatelessWidget
                 title: "Training plans",
                 image: 'assets/images/training_plan_main_menu_icon.jpg',
                 onPress: () {}
-            ),MenuOption(
+            ),
+            MenuOption(
                 title: "Exercises",
                 image: 'assets/images/exercises_main_menu_icon.jpg',
+                onPress: () {}
+            ),
+            MenuOption(
+                title: "Settings",
+                image: 'assets/images/settings_main_menu_icon.png',
                 onPress: () {}
             ),
           ],

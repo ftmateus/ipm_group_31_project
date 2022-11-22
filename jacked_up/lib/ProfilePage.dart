@@ -31,17 +31,21 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Center(
               child: Column(
                 children: [
-                  const Icon(Icons.person, size: 120),
+                  const CircleAvatar(
+                    radius: 72,
+                    backgroundImage: AssetImage("images/fctense_profile_picture.png"),
+                  ),
                   const Text("FCTense",
                     style: TextStyle(
-                        fontSize: 42
+                        fontSize: 42,
+                        color: Colors.white
                     ),
                   ),
                   TextButton(
                     onPressed: () => {},
                     child: const Text('Edit photo',
                       style: TextStyle(
-                          fontSize: 20
+                          fontSize: 20,
                       ),
                     ),
                   ),
@@ -58,12 +62,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: const [
                     Text("Weight",
                       style: TextStyle(
-                          fontSize: 25
+                          fontSize: 25,
+                          color: Colors.white
                       ),
                     ),
                     Text("47kg",
                       style: TextStyle(
-                          fontSize: 25
+                          fontSize: 25,
+                          color: Colors.white
                       ),
                     )
                   ],
@@ -78,12 +84,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: const [
                     Text("Height",
                       style: TextStyle(
-                          fontSize: 25
+                          fontSize: 25,
+                          color: Colors.white
                       ),
                     ),
                     Text("1,62m",
                       style: TextStyle(
-                          fontSize: 25
+                          fontSize: 25,
+                          color: Colors.white
                       ),
                     )
                   ],
@@ -127,32 +135,18 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
         centerTitle: true,
         leading: BackButton(
-          color: Colors.black,
+          color: Colors.white,
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
+      backgroundColor: Colors.black87,
       body: _listViewBody(),
-    );
-  }
-
-  void showModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        content: const Text('Example Dialog'),
-        actions: <TextButton>[
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Close'),
-          )
-        ],
-      ),
     );
   }
 }

@@ -17,7 +17,7 @@ class ProfileButton extends StatelessWidget
     return Container(
       padding: const EdgeInsets.all(20),
       child: Material(
-          color: Color.fromRGBO(85, 122, 250, 1),
+          color: Color.fromRGBO(85, 122, 250, 1).withAlpha(200),
           borderRadius: BorderRadius.circular(30),
           type: MaterialType.button,
           child: InkWell(
