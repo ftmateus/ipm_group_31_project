@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
+import 'MainMenu.dart';
 import 'RegisterScreen.dart';
 
 enum Gender {
@@ -52,6 +53,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   passwordField() {
     return TextFormField(
+      obscureText: true,
       decoration: const InputDecoration(
         hintText: 'Enter your password',
         labelText: 'Password',
@@ -94,7 +96,12 @@ class _SignInScreenState extends State<SignInScreen> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Data is in processing.')));
+                    SnackBar(content: Text('Data is in processing.'))
+                );
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainMenu())
+                );
               }
             },
             child: const Text('Sign In'),

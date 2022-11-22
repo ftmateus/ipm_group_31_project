@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'MainMenu.dart';
+
 class RegisterScreen extends StatefulWidget {
   static String id = '/RegisterScreen';
   const RegisterScreen({Key? key}) : super(key: key);
@@ -173,8 +175,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Data is in processing.')));
+                    const SnackBar(content: Text('Data is in processing.')));
               }
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MainMenu())
+              );
             },
             child: const Text('Sign Up'),
           ),

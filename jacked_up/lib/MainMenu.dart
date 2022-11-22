@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:jacked_up/MenuOptions.dart';
 import 'package:jacked_up/ProfileButton.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const MainMenu());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainMenu extends StatelessWidget {
+  const MainMenu({super.key});
 
   static const String _title = 'Flutter Code Sample';
 
