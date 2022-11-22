@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jacked_up/ProfilePage.dart';
 
 class ProfileButton extends StatelessWidget
 {
@@ -22,7 +23,12 @@ class ProfileButton extends StatelessWidget
           child: InkWell(
             borderRadius: BorderRadius.circular(30),
             splashColor: Colors.amberAccent.withAlpha(80),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage())
+              );
+            },
             child: Container(
               padding: const EdgeInsets.all(10),
               child: Center(
@@ -48,7 +54,7 @@ class ProfileButton extends StatelessWidget
                           Column(
                             children: const [
                               Text("Height"),
-                              Text("162m")
+                              Text("1,62m")
                             ],
                           ),
                         ],
