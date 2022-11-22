@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'BookService.dart';
+
 class MenuOptions extends StatelessWidget
 {
   const MenuOptions({
@@ -27,7 +29,12 @@ class MenuOptions extends StatelessWidget
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30),
                   splashColor: Colors.amberAccent.withAlpha(80),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Services()),
+                    );
+                  },
                   child: const Center(
                       child: Text(
                         "Book Services",
