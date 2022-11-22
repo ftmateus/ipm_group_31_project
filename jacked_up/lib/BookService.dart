@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+// void main() {
+//   runApp(const BookService());
+// }
 
 class Pair<T1, T2> {
   final T1 a;
@@ -12,19 +12,19 @@ class Pair<T1, T2> {
   Pair(this.a, this.b);
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Book Services',
-        theme: ThemeData(
-            colorSchemeSeed: const Color(0xff3b01f8), useMaterial3: true),
-        home: const Services());
-  }
-}
+// class BookService extends StatelessWidget {
+//   const BookService({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//         debugShowCheckedModeBanner: false,
+//         title: 'Book Services',
+//         theme: ThemeData(
+//             colorSchemeSeed: const Color(0xff3b01f8), useMaterial3: true),
+//         home: const Services());
+//   }
+// }
 
 class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);
@@ -50,9 +50,18 @@ class _ServicesState extends State<Services> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: const Center(
           child: Text('Book Services'),
+        ),
+        backgroundColor: Colors.orange,
+        centerTitle: true,
+        leading: BackButton(
+            color: Colors.white,
+          onPressed: () {
+              Navigator.pop(context);
+          },
         ),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
@@ -97,6 +106,7 @@ class _ServicesState extends State<Services> {
         label: const Text('Reservations'),
         tooltip: 'Your Bookings',
         icon: const Icon(Icons.description),
+        backgroundColor: Colors.orange,
       ),
     );
   }
@@ -217,6 +227,9 @@ Future<DateTime?> _showReservationPicker(
               TextButton(
                 onPressed: () => Navigator.pop(context, null),
                 child: const Text('Cancel'),
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.red,
+                ),
               ),
               TextButton(
                   onPressed: () {
@@ -241,6 +254,10 @@ Future<DateTime?> _showReservationPicker(
                     Navigator.of(context).pop(dateTime);
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.orange,
+                    textStyle: const TextStyle(fontWeight: FontWeight.bold)
+                  ),
                   child: const Text('Book'))
             ],
           );
