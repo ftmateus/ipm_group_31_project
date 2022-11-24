@@ -62,13 +62,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: const [
                     Text("Weight",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white
                       ),
                     ),
                     Text("47kg",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white
                       ),
                     )
@@ -84,13 +84,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: const [
                     Text("Height",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white
                       ),
                     ),
                     Text("1,62m",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white
                       ),
                     )
