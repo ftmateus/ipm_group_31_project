@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: const EdgeInsets.only(bottom: 75.0),
+          margin: const EdgeInsets.only(bottom: 40.0),
           child: Center(
               child: Column(
                 children: [
@@ -62,19 +62,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: const [
                     Text("Weight",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white
                       ),
                     ),
                     Text("47kg",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white
                       ),
                     )
                   ],
                 ),
-                const Icon(Icons.edit, size: 40, color: Colors.blue)
+                const Icon(Icons.edit, size: 32, color: Colors.blue)
               ],
             )
             ,
@@ -84,28 +84,73 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: const [
                     Text("Height",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white
                       ),
                     ),
                     Text("1,62m",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           color: Colors.white
                       ),
                     )
                   ],
                 ),
-                Icon(Icons.edit, size: 40, color: Colors.blue)
+                Icon(Icons.edit, size: 32, color: Colors.blue)
               ],
             )
           ],
         ),
         Container(
-          margin: const EdgeInsets.only(bottom: 75.0),
-          child: Column(
+          margin: const EdgeInsets.only(bottom: 25.0),
+          child: null,
+        ),
+        Container(
+          width: 400,
+          height: 200,
+          child: Material(
+            color: Colors.blue.shade200,
+            borderRadius: BorderRadius.circular(30),
+            child: Column(
+              children: [
+                const Text("My Body",
+                  style: TextStyle(
+                    fontSize: 32
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width : 200,
+                      child: Center(
+                        child: Text("BMI",
+                          style: TextStyle(
+                              fontSize: 20
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width : 200,
+                      child: Center(
+                        child: Text("Body fat percentage",
+                          style: TextStyle(
+                              fontSize: 20,
 
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(bottom: 25.0),
+          child: null,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

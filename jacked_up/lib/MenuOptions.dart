@@ -52,10 +52,8 @@ class MenuOptions extends StatelessWidget
 {
   const MenuOptions({
     super.key,
-    required this.index,
   });
 
-  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -87,15 +85,15 @@ class MenuOptions extends StatelessWidget
                 onPress: () {}
             ),
             MenuOption(
-                title: "Exercises",
+                title: "Exercises Tutorials",
                 image: 'assets/images/exercises_main_menu_icon.jpg',
                 onPress: () {}
             ),
-            MenuOption(
-                title: "Settings",
-                image: 'assets/images/settings_main_menu_icon.png',
-                onPress: () {}
-            ),
+            // MenuOption(
+            //     title: "Settings",
+            //     image: 'assets/images/settings_main_menu_icon.png',
+            //     onPress: () {}
+            // ),
           ],
         )
     );

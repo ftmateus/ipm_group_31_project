@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'MenuOptions.dart';
+
 // void main() {
 //   runApp(const BookService());
 // }
@@ -34,28 +36,28 @@ class Services extends StatefulWidget {
 }
 
 class _ServicesState extends State<Services> {
-  final titles = [
-    "Campo A",
-    "Campo B",
-    "Campo C",
-    "Campo D",
-    "Zumba",
-    "Cycling",
-    "Pilate",
-    "Body Pump"
-  ];
+  final titles = {
+    "HIIT": "assets/images/HIIT.png",
+    "Zumba": "assets/images/zumba-class.jpg",
+    "Cycling": "assets/images/cycling.jpg",
+    "Pilates": "assets/images/pilates.png",
+    "Body Pump": "assets/images/body_pump.jpg",
+    "Yoga": "assets/images/yoga.jpg",
+    // "Campo C": "",
+    // "Campo D": "",
+  };
 
   final reservations = <Pair<DateTime, String>>[];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Colors.black87,
       appBar: AppBar(
         title: const Center(
           child: Text('Book Services'),
         ),
-        backgroundColor: Colors.orange,
+        backgroundColor: const Color.fromRGBO(85, 122, 250, 1).withAlpha(200),
         centerTitle: true,
         leading: BackButton(
             color: Colors.white,
@@ -69,44 +71,55 @@ class _ServicesState extends State<Services> {
         const Padding(
             padding: EdgeInsets.only(left: 20, top: 20, bottom: 5),
             child: Text('Available Services:',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))),
         Expanded(
-            child: ListView.builder(
-                padding: const EdgeInsets.all(8.0),
-                itemCount: titles.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                      shape: const RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.black45,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                      ),
-                      color: Theme.of(context).colorScheme.surfaceVariant,
-                      child: ListTile(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
-                          ),
-                          contentPadding: const EdgeInsets.only(
-                              left: 20, top: 5, bottom: 5),
-                          onTap: () async {
-                            final date = await _showReservationPicker(
-                                context, titles[index]);
-                            if (date == null) return;
-                            setState(() =>
-                                reservations.add(Pair(date, titles[index])));
-                          },
-                          title: Text(titles[index]),
-                          leading:
-                              const Icon(Icons.arrow_circle_right, size: 25)));
-                }))
+            child: GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                children:
+                    titles.entries.map((service) => MenuOption(title: service.key, image: service.value, onPress: () async {
+                      final date = await _showReservationPicker(
+                          context, service.key);
+                      if (date == null) return;
+                      setState(() =>
+                          reservations.add(Pair(date, service.key)));
+                    })).toList()
+
+                  // return Card(
+                  //     shape: const RoundedRectangleBorder(
+                  //       side: BorderSide(
+                  //         color: Colors.black45,
+                  //       ),
+                  //       borderRadius: BorderRadius.all(Radius.circular(12)),
+                  //     ),
+                  //     color: Theme.of(context).colorScheme.surfaceVariant,
+                  //     child: ListTile(
+                  //         shape: const RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(12)),
+                  //         ),
+                  //         contentPadding: const EdgeInsets.only(
+                  //             left: 20, top: 5, bottom: 5),
+                  //         onTap: () async {
+                  //           final date = await _showReservationPicker(
+                  //               context, titles[index]);
+                  //           if (date == null) return;
+                  //           setState(() =>
+                  //               reservations.add(Pair(date, titles[index])));
+                  //         },
+                  //         title: Text(titles[index]),
+                  //         leading:
+                  //             const Icon(Icons.arrow_circle_right, size: 25)));
+                ))
       ]),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _showReservations,
         label: const Text('Reservations'),
         tooltip: 'Your Bookings',
         icon: const Icon(Icons.description),
-        backgroundColor: Colors.orange,
+        backgroundColor: const Color.fromRGBO(85, 122, 250, 1).withAlpha(200),
       ),
     );
   }

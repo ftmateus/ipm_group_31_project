@@ -35,7 +35,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Column(
       children: <Widget>[
         ProfileButton(index: 0, onPress: () => {}),
-        MenuOptions(index: 0)
+        MenuOptions()
       ],
     );
   }
