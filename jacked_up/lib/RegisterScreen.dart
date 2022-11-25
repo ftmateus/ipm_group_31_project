@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jacked_up/RegisterScreenSecond.dart';
+
+import 'SignInScreen.dart';
 
 import 'MainMenu.dart';
 
 class RegisterScreen extends StatefulWidget {
-  static String id = '/RegisterScreen';
+
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
@@ -27,6 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         labelText: 'Secret Code',
         icon: Icon(Icons.vpn_key),
       ),
+      controller: _secretCode,
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please enter the secret code';
@@ -45,6 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         labelText: 'Email',
         icon: Icon(Icons.email),
       ),
+      controller: _email,
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please enter an email';
@@ -61,6 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         labelText: 'Username',
         icon: Icon(Icons.person),
       ),
+      controller: _username,
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please enter an username';
@@ -77,6 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         labelText: 'Password',
         icon: Icon(Icons.key),
       ),
+      controller: _pass,
       obscureText: true,
 
       validator: (String? value) {
@@ -95,12 +102,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         labelText: 'Confirm Password',
         icon: Icon(Icons.key),
       ),
+      controller: _confirmPass,
       obscureText: true,
-      enableSuggestions: false,
-      autocorrect: false,
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please confirm your password';
+        }else if(value != _pass.text){
+          return 'Passwords do not match!';
         }
         return null;
       },
@@ -124,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         state.didChange(value);
                       });
                     }),
-                Text('I accept the Terms and Conditions'),
+                const Text('I accept the Terms and Conditions'),
               ],
             ),
             Text(
@@ -168,19 +176,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
           TextButton(
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.only(
-                  left: 40, top: 16, bottom: 16, right: 40),
+              minimumSize: const Size(130, 40),
               textStyle: const TextStyle(fontSize: 20),
             ),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Data is in processing.')));
+                var user = UserInfo(_email.text, _username.text, _pass.text);
+                Navigator.pushAndRemoveUntil(context,
+                  MaterialPageRoute(builder: (context) =>
+                      RegisterScreenSecond(userInfo: user)), (route) => false);
               }
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MainMenu())
-              );
             },
             child: const Text('Sign Up'),
           ),
@@ -194,7 +199,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(title: const Text('Go back'),
+        appBar: AppBar(title: const Text('Back'),
+          titleSpacing: 0,
           centerTitle: false,
           backgroundColor: Colors.transparent,
           elevation: 0,),
@@ -203,15 +209,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
+        const DecoratedBox(decoration: BoxDecoration(color: Colors.black)),
         const Expanded(
             child: Image(
                 image: AssetImage('assets/images/jackedUp.png'),
                 fit: BoxFit.cover,
-                width: double.infinity)),
+                width: double.infinity,
+            height: 100,)),
         Form(
           key: _formKey,
-          child: SizedBox(
-            width: 420,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
