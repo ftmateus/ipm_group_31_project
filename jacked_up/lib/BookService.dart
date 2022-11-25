@@ -28,6 +28,63 @@ class Pair<T1, T2> {
 //   }
 // }
 
+final services = [
+  Pair("HIIT", "assets/images/HIIT.png"),
+  Pair("Zumba", "assets/images/zumba-class.jpg"),
+  Pair("Cycling", "assets/images/cycling.jpg"),
+  Pair("Pilates", "assets/images/pilates.png"),
+  Pair("Body Pump", "assets/images/body_pump.jpg"),
+  Pair("Yoga", "assets/images/yoga.jpg"),
+  // "Campo C": "",
+  // "Campo D": "",
+];
+
+class ServiceCard extends StatelessWidget
+{
+  const ServiceCard({
+    super.key,
+    required this.title,
+    required this.image,
+    required this.onPress
+  });
+
+  final String image;
+  final String title;
+  final void Function() onPress;
+
+//   () async {
+//   final date = await _showReservationPicker(
+//   context, titles.ke);
+//   if (date == null) return;
+//   setState(() =>
+//   reservations.add(Pair(date, titles[index])));
+// }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        shape: const RoundedRectangleBorder(
+          side: BorderSide(
+            color: Colors.black45,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
+        color: Theme.of(context).colorScheme.surfaceVariant,
+        child: ListTile(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+            contentPadding: const EdgeInsets.only(
+                left: 20, top: 5, bottom: 5),
+            onTap: onPress,
+            title: Text(title),
+            leading:
+                const Icon(Icons.arrow_circle_right, size: 25)
+        )
+    );
+  }
+}
+
 class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);
 
@@ -36,16 +93,6 @@ class Services extends StatefulWidget {
 }
 
 class _ServicesState extends State<Services> {
-  final titles = {
-    "HIIT": "assets/images/HIIT.png",
-    "Zumba": "assets/images/zumba-class.jpg",
-    "Cycling": "assets/images/cycling.jpg",
-    "Pilates": "assets/images/pilates.png",
-    "Body Pump": "assets/images/body_pump.jpg",
-    "Yoga": "assets/images/yoga.jpg",
-    // "Campo C": "",
-    // "Campo D": "",
-  };
 
   final reservations = <Pair<DateTime, String>>[];
 
@@ -73,20 +120,12 @@ class _ServicesState extends State<Services> {
             child: Text('Available Services:',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))),
         Expanded(
-            child: GridView.count(
-                primary: false,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                children:
-                    titles.entries.map((service) => MenuOption(title: service.key, image: service.value, onPress: () async {
-                      final date = await _showReservationPicker(
-                          context, service.key);
-                      if (date == null) return;
-                      setState(() =>
-                          reservations.add(Pair(date, service.key)));
-                    })).toList()
+            child: ListView.builder(
+                  padding: const EdgeInsets.all(8.0),
+                  itemCount: services.length,
+                  itemBuilder: (context, index) {
+                    return ServiceCard(title: services[0].a, image: services[0].b, onPress: () {});
+                  }
 
                   // return Card(
                   //     shape: const RoundedRectangleBorder(
