@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jacked_up/MainMenu.dart';
 
 import 'MenuOptions.dart';
 
@@ -52,35 +53,59 @@ class ServiceCard extends StatelessWidget
   final String title;
   final void Function() onPress;
 
-//   () async {
-//   final date = await _showReservationPicker(
-//   context, titles.ke);
-//   if (date == null) return;
-//   setState(() =>
-//   reservations.add(Pair(date, titles[index])));
-// }
+
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(
-            color: Colors.black45,
+    // return Card(
+    //     shape: const RoundedRectangleBorder(
+    //       side: BorderSide(
+    //         color: Colors.black45,
+    //       ),
+    //       borderRadius: BorderRadius.all(Radius.circular(12)),
+    //     ),
+    //     color: Theme.of(context).colorScheme.surfaceVariant,
+    //     child: ListTile(
+    //         shape: const RoundedRectangleBorder(
+    //           borderRadius: BorderRadius.all(Radius.circular(12)),
+    //         ),
+    //         contentPadding: const EdgeInsets.only(
+    //             left: 20, top: 5, bottom: 5),
+    //         onTap: onPress,
+    //         title: Text(title),
+    //         leading:
+    //             const Icon(Icons.arrow_circle_right, size: 25)
+    //     )
+    // );
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          image: DecorationImage(
+            image: AssetImage(image),
+            fit: BoxFit.fill
           ),
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        color: Theme.of(context).colorScheme.surfaceVariant,
-        child: ListTile(
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-            contentPadding: const EdgeInsets.only(
-                left: 20, top: 5, bottom: 5),
+          shape: BoxShape.rectangle
+      ),
+      width: 1,
+      child: Material(
+          color: Colors.black.withOpacity(0.4),
+          borderRadius: BorderRadius.circular(30),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(30),
+            splashColor: Colors.amberAccent.withAlpha(80),
             onTap: onPress,
-            title: Text(title),
-            leading:
-                const Icon(Icons.arrow_circle_right, size: 25)
-        )
+            child: Center(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
+                )
+            ),
+          )
+      ),
     );
   }
 }
@@ -120,12 +145,25 @@ class _ServicesState extends State<Services> {
             child: Text('Available Services:',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))),
         Expanded(
-            child: ListView.builder(
-                  padding: const EdgeInsets.all(8.0),
-                  itemCount: services.length,
-                  itemBuilder: (context, index) {
-                    return ServiceCard(title: services[0].a, image: services[0].b, onPress: () {});
-                  }
+            child: GridView.count(
+                      primary: false,
+                      padding: const EdgeInsets.all(20),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 2.5,
+                      crossAxisCount: 1,
+                      children: services.map((service) =>
+                          ServiceCard(
+                            title: service.a,
+                            image: service.b,
+                            onPress: () async {
+                              final date = await _showReservationPicker(
+                                  context, service.a);
+                              if (date == null) return;
+                              setState(() =>
+                                  reservations.add(Pair(date, service.a)));
+                            })
+                      ).toList(),
 
                   // return Card(
                   //     shape: const RoundedRectangleBorder(
