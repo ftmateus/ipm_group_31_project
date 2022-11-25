@@ -93,16 +93,6 @@ class Services extends StatefulWidget {
 }
 
 class _ServicesState extends State<Services> {
-  final titles = {
-    "HIIT": "assets/images/HIIT.png",
-    "Zumba": "assets/images/zumba-class.jpg",
-    "Cycling": "assets/images/cycling.jpg",
-    "Pilates": "assets/images/pilates.png",
-    "Body Pump": "assets/images/body_pump.jpg",
-    "Yoga": "assets/images/yoga.jpg",
-    // "Campo C": "",
-    // "Campo D": "",
-  };
 
   final reservations = <Pair<DateTime, String>>[];
 
