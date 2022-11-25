@@ -7,26 +7,26 @@ import 'RegisterScreen.dart';
 enum Gender {
   male,
   female,
-  nonBinary,
+  other,
 }
 
 class UserInfo {
   final String email;
   final String username;
   final String password;
-  final DateTime birthdate;
-  final Gender gender;
-  final int height;
-  final int width;
+  final DateTime? birthdate;
+  final Gender? gender;
+  final int? height;
+  final int? width;
 
-  UserInfo(this.email, this.username, this.password, this.birthdate,
-      this.gender, this.height, this.width);
+  UserInfo(this.email, this.username, this.password, [this.birthdate,
+      this.gender, this.height, this.width]);
 }
 
-class SignInScreen extends StatefulWidget {
-  static String id = '/SignInScreen';
 
-  const SignInScreen({Key? key}) : super(key: key);
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key,  required this.userInfo});
+  final UserInfo userInfo;
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -34,6 +34,32 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _pass = TextEditingController();
+
+  List<UserInfo> users = <UserInfo>[];
+
+  bool userNameExists(String userName){
+    bool found= false;
+    for(final user in users){
+      if(user.username==userName){
+        found=true;
+      }
+    }
+    return found;
+  }
+
+  bool rightPassword(String pass, String userName){
+    bool found= false;
+    for(final user in users){
+      if(user.username==userName){
+        if(user.password==pass){
+          found = true;
+        }
+      }
+    }
+    return found;
+  }
 
   userNameField() {
     return TextFormField(
@@ -42,9 +68,12 @@ class _SignInScreenState extends State<SignInScreen> {
         labelText: 'Username',
         icon: Icon(Icons.person),
       ),
+      controller: _username,
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please enter an username';
+        }else if(!userNameExists(value)){
+          return 'User does not exist';
         }
         return null;
       },
@@ -59,9 +88,12 @@ class _SignInScreenState extends State<SignInScreen> {
         labelText: 'Password',
         icon: Icon(Icons.key),
       ),
+      controller: _pass,
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please enter a password';
+        }else if (!rightPassword(value, _username.text)){
+          return 'Wrong password!';
         }
         return null;
       },
@@ -89,15 +121,15 @@ class _SignInScreenState extends State<SignInScreen> {
           TextButton(
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.only(
-                  left: 40, top: 16, bottom: 16, right: 40),
+              minimumSize: const Size(130, 40),
               textStyle: const TextStyle(fontSize: 20),
             ),
             onPressed: () {
+              setState(() {
+                users.add(widget.userInfo);
+              });
+
               if (_formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Data is in processing.'))
-                );
                 Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const MainMenu())
@@ -127,7 +159,10 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                Navigator.pushNamed(context, RegisterScreen.id);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                );
               }),
       ]),
     );
@@ -148,14 +183,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 fit: BoxFit.cover,
                 width: double.infinity)),
               Form(
-              key: _formKey,
-                child: SizedBox(
-                  width: 420,
-                  child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                  userNameField(),
-                  passwordField(),
+                key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                    userNameField(),
+                    passwordField(),
                     const SizedBox(height: 30),
                   signInButton(),
               ],
@@ -164,7 +199,7 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
               const SizedBox(height: 15),
               createAnAccontText(),
-              const SizedBox(height: 120),
+              const SizedBox(height: 20),
       ],
     )));
   }
