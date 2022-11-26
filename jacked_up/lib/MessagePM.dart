@@ -17,6 +17,8 @@ class MessagePM extends StatefulWidget {
 
 class _MessagePMState extends State<MessagePM> {
   late List<Message> data;
+  final TextEditingController _message = TextEditingController();
+
 
   @override
   void initState() {
@@ -66,17 +68,19 @@ class _MessagePMState extends State<MessagePM> {
                 children: [
                   Container(
                     width: 350,
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Reply',
                       ),
+                      controller: _message,
                     ),
                   ),
                   IconButton(
                       onPressed: () {
                         setState(() {
-                          data.insert(0, Message(owner: MessageOwner.other, text: "JJJJJJ"));
+                          data.insert(0, Message(owner: MessageOwner.other, text: _message.text));
+                          _message.clear();
                         });
                       },
                       icon: Icon(Icons.send, size: 40)
