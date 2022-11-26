@@ -16,12 +16,12 @@ class ProfileButton extends StatelessWidget
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          image: DecorationImage(
-            fit : BoxFit.fill,
-            image: AssetImage("assets/images/profile_btn_background.jpg")
-          )
-      ),
+      // decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //       fit : BoxFit.fill,
+      //       image: AssetImage("assets/images/profile_btn_background.jpg")
+      //     )
+      // ),
       child: Material(
           color: Theme.of(context).colorScheme.primaryContainer.withAlpha(200),
           borderRadius: BorderRadius.circular(30),

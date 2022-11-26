@@ -1,167 +1,140 @@
-import 'package:flutter/material.dart';
+// Copyright 2020, the Flutter project authors. Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+import 'dart:math';
 import 'dart:ui' as ui;
-import 'package:intl/intl.dart';
-import 'package:jacked_up/MainMenu.dart';
 
-import 'MenuOptions.dart';
+import 'package:flutter/material.dart';
 
-// void main() {
-//   runApp(const BookService());
-// }
-
-class Pair<T1, T2> {
-  final T1 a;
-  final T2 b;
-
-  Pair(this.a, this.b);
-}
-
-// class BookService extends StatelessWidget {
-//   const BookService({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         debugShowCheckedModeBanner: false,
-//         title: 'Book Services',
-//         theme: ThemeData(
-//             colorSchemeSeed: const Color(0xff3b01f8), useMaterial3: true),
-//         home: const Services());
-//   }
-// }
-
-final services = [
-  Pair("HIIT", "assets/images/HIIT.png"),
-  Pair("Zumba", "assets/images/zumba-class.jpg"),
-  Pair("Cycling", "assets/images/cycling.jpg"),
-  Pair("Pilates", "assets/images/pilates.png"),
-  Pair("Body Pump", "assets/images/body_pump.jpg"),
-  Pair("Yoga", "assets/images/yoga.jpg"),
-  // "Campo C": "",
-  // "Campo D": "",
-];
-
-class ServiceCard extends StatelessWidget
-{
-  const ServiceCard({
-    super.key,
-    required this.title,
-    required this.image,
-    required this.onPress
-  });
-
-  final String image;
-  final String title;
-  final void Function() onPress;
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    // return Card(
-    //     shape: const RoundedRectangleBorder(
-    //       side: BorderSide(
-    //         color: Colors.black45,
-    //       ),
-    //       borderRadius: BorderRadius.all(Radius.circular(12)),
-    //     ),
-    //     color: Theme.of(context).colorScheme.surfaceVariant,
-    //     child: ListTile(
-    //         shape: const RoundedRectangleBorder(
-    //           borderRadius: BorderRadius.all(Radius.circular(12)),
-    //         ),
-    //         contentPadding: const EdgeInsets.only(
-    //             left: 20, top: 5, bottom: 5),
-    //         onTap: onPress,
-    //         title: Text(title),
-    //         leading:
-    //             const Icon(Icons.arrow_circle_right, size: 25)
-    //     )
-    // );
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.fill
-          ),
-          shape: BoxShape.rectangle
-      ),
-      width: 1,
-      child: Material(
-          color: Colors.black.withOpacity(0.4),
-          borderRadius: BorderRadius.circular(30),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(30),
-            splashColor: Colors.amberAccent.withAlpha(80),
-            onTap: onPress,
-            child: Center(
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 40,
-                  ),
-                )
-            ),
-          )
-      ),
-    );
-  }
-}
-
+@immutable
 class MessagePM extends StatefulWidget {
-  const MessagePM({Key? key}) : super(key: key);
+  const MessagePM({super.key});
 
   @override
   State<MessagePM> createState() => _MessagePMState();
 }
 
 class _MessagePMState extends State<MessagePM> {
+  late List<Message> data;
 
-  final reservations = <Pair<DateTime, String>>[];
+  @override
+  void initState() {
+    super.initState();
+    data = MessageGenerator.generate(60, 1337);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Row(
+        appBar: AppBar(
+          title: Center(
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundImage: AssetImage("assets/images/pt_profile_picture.png"),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15),
+                  child: Text('João Santos'),
+                )
+              ],
+            ),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
             children: [
-              CircleAvatar(
-                radius: 25,
-                backgroundImage: AssetImage("assets/images/pt_profile_picture.png"),
-              ),
               Container(
-                padding: EdgeInsets.only(left: 15),
-                child: Text('João Santos'),
+                height: 655,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  reverse: true,
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    final message = data[index];
+                    return MessageBubble(
+                      message: message,
+                      child: Text(message.text),
+                    );
+                  },
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: 350,
+                    child: const TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Reply',
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          data.insert(0, Message(owner: MessageOwner.other, text: "JJJJJJ"));
+                        });
+                      },
+                      icon: Icon(Icons.send, size: 40)
+                  )
+                ],
               )
             ],
           ),
         ),
-        backgroundColor: const Color.fromRGBO(85, 122, 250, 1).withAlpha(200),
-        centerTitle: true,
-        leading: BackButton(
-          color: Colors.white,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: BubbleBackground(
-        // The colors of the gradient, which are different
-        // depending on which user sent this message.
-        colors: const [Color(0xFF6C7689), Color(0xFF3A364B)],
-        // The content within the bubble.
-        child: DefaultTextStyle.merge(
-          style: const TextStyle(
-            fontSize: 18.0,
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text("SSSS"),
+      );
+  }
+}
+
+@immutable
+class MessageBubble extends StatelessWidget {
+  const MessageBubble({
+    super.key,
+    required this.message,
+    required this.child,
+  });
+
+  final Message message;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final messageAlignment =
+    message.isMine ? Alignment.topLeft : Alignment.topRight;
+
+    return FractionallySizedBox(
+      alignment: messageAlignment,
+      widthFactor: 0.8,
+      child: Align(
+        alignment: messageAlignment,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 20.0),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            child: BubbleBackground(
+              colors: [
+                message.isMine
+                    ? const Color(0xFF6C7689)
+                    : const Color(0xFF19B7FF),
+                message.isMine
+                    ? const Color(0xFF3A364B)
+                    : const Color(0xFF491CCB),
+              ],
+              child: DefaultTextStyle.merge(
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: child,
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -184,15 +157,14 @@ class BubbleBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: BubblePainter(
+        scrollable: Scrollable.of(context)!,
         bubbleContext: context,
         colors: colors,
-        scrollable: ScrollableState()
       ),
       child: child,
     );
   }
 }
-
 
 class BubblePainter extends CustomPainter {
   BubblePainter({
@@ -201,18 +173,12 @@ class BubblePainter extends CustomPainter {
     required List<Color> colors,
   })  : _scrollable = scrollable,
         _bubbleContext = bubbleContext,
-        _colors = colors;
+        _colors = colors,
+        super(repaint: scrollable.position);
 
   final ScrollableState _scrollable;
   final BuildContext _bubbleContext;
   final List<Color> _colors;
-
-  @override
-  bool shouldRepaint(BubblePainter oldDelegate) {
-    return oldDelegate._scrollable != _scrollable ||
-        oldDelegate._bubbleContext != _bubbleContext ||
-        oldDelegate._colors != _colors;
-  }
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -233,4 +199,68 @@ class BubblePainter extends CustomPainter {
       );
     canvas.drawRect(Offset.zero & size, paint);
   }
+
+  @override
+  bool shouldRepaint(BubblePainter oldDelegate) {
+    return oldDelegate._scrollable != _scrollable ||
+        oldDelegate._bubbleContext != _bubbleContext ||
+        oldDelegate._colors != _colors;
+  }
+}
+
+enum MessageOwner { myself, other }
+
+@immutable
+class Message {
+  const Message({
+    required this.owner,
+    required this.text,
+  });
+
+  final MessageOwner owner;
+  final String text;
+
+  bool get isMine => owner == MessageOwner.myself;
+}
+
+class MessageGenerator {
+  static List<Message> generate(int count, [int? seed]) {
+    final random = Random(seed);
+    return List<Message>.generate(count, (index) {
+      return Message(
+        owner: random.nextBool() ? MessageOwner.myself : MessageOwner.other,
+        text: _exampleData[random.nextInt(_exampleData.length)],
+      );
+    });
+  }
+
+  static final _exampleData = [
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    'In tempus mauris at velit egestas, sed blandit felis ultrices.',
+    'Ut molestie mauris et ligula finibus iaculis.',
+    'Sed a tempor ligula.',
+    'Test',
+    'Phasellus ullamcorper, mi ut imperdiet consequat, nibh augue condimentum nunc, vitae molestie massa augue nec erat.',
+    'Donec scelerisque, erat vel placerat facilisis, eros turpis egestas nulla, a sodales elit nibh et enim.',
+    'Mauris quis dignissim neque. In a odio leo. Aliquam egestas egestas tempor. Etiam at tortor metus.',
+    'Quisque lacinia imperdiet faucibus.',
+    'Proin egestas arcu non nisl laoreet, vitae iaculis enim volutpat. In vehicula convallis magna.',
+    'Phasellus at diam a sapien laoreet gravida.',
+    'Fusce maximus fermentum sem a scelerisque.',
+    'Nam convallis sapien augue, malesuada aliquam dui bibendum nec.',
+    'Quisque dictum tincidunt ex non lobortis.',
+    'In hac habitasse platea dictumst.',
+    'Ut pharetra ligula libero, sit amet imperdiet lorem luctus sit amet.',
+    'Sed ex lorem, lacinia et varius vitae, sagittis eget libero.',
+    'Vestibulum scelerisque velit sed augue ultricies, ut vestibulum lorem luctus.',
+    'Pellentesque et risus pretium, egestas ipsum at, facilisis lectus.',
+    'Praesent id eleifend lacus.',
+    'Fusce convallis eu tortor sit amet mattis.',
+    'Vivamus lacinia magna ut urna feugiat tincidunt.',
+    'Sed in diam ut dolor imperdiet vehicula non ac turpis.',
+    'Praesent at est hendrerit, laoreet tortor sed, varius mi.',
+    'Nunc in odio leo.',
+    'Praesent placerat semper libero, ut aliquet dolor.',
+    'Vestibulum elementum leo metus, vitae auctor lorem tincidunt ut.',
+  ];
 }

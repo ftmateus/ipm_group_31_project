@@ -178,29 +178,29 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 25.0),
-          child: null,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            TextButton(onPressed: () {},
-                child: const Text("Change email",
-                  style: TextStyle(
-                    fontSize: 25
-                  ),
-                )
-            ),
-            TextButton(onPressed: () {},
-                child: const Text("Change password",
-                  style: TextStyle(
-                      fontSize: 25
-                  ),
-                )
-            )
-          ],
-        ),
+        // Container(
+        //   margin: const EdgeInsets.only(bottom: 25.0),
+        //   child: null,
+        // ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //   children: [
+        //     TextButton(onPressed: () {},
+        //         child: const Text("Change email",
+        //           style: TextStyle(
+        //             fontSize: 25
+        //           ),
+        //         )
+        //     ),
+        //     TextButton(onPressed: () {},
+        //         child: const Text("Change password",
+        //           style: TextStyle(
+        //               fontSize: 25
+        //           ),
+        //         )
+        //     )
+        //   ],
+        // ),
         Container(
           margin: const EdgeInsets.only(bottom: 25.0),
           child: null,
@@ -210,7 +210,7 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Icon(Icons.settings),
-                const Text("More Settings",
+                const Text("Settings",
                   style: TextStyle(
                       fontSize: 40
                   ),
@@ -239,7 +239,9 @@ class _ProfilePageState extends State<ProfilePage> {
           },
         ),
       ),
-      body: _listViewBody(),
+      body: SingleChildScrollView(
+          child : _listViewBody()
+      ),
     );
   }
 }
