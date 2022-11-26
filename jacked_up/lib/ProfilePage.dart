@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   const CircleAvatar(
                     radius: 72,
-                    backgroundImage: AssetImage("images/fctense_profile_picture.png"),
+                    backgroundImage: AssetImage("assets/images/fctense_profile_picture.png"),
                   ),
                   const Text("FCTense",
                     style: TextStyle(
@@ -74,7 +74,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     )
                   ],
                 ),
-                const Icon(Icons.edit, size: 32, color: Colors.blue)
+                IconButton(
+                  color: Theme.of(context).colorScheme.primary,
+                  icon: Icon(Icons.edit, size: 32),
+                  onPressed: () {},
+                )
               ],
             )
             ,
@@ -85,18 +89,20 @@ class _ProfilePageState extends State<ProfilePage> {
                     Text("Height",
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white
                       ),
                     ),
                     Text("1,62m",
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white
                       ),
                     )
                   ],
                 ),
-                Icon(Icons.edit, size: 32, color: Colors.blue)
+                IconButton(
+                    color: Theme.of(context).colorScheme.primary,
+                    icon: Icon(Icons.edit, size: 32),
+                    onPressed: () {},
+                )
               ],
             )
           ],
@@ -109,13 +115,13 @@ class _ProfilePageState extends State<ProfilePage> {
           width: 400,
           height: 200,
           child: Material(
-            color: Colors.blue.shade200,
             borderRadius: BorderRadius.circular(30),
+            color:  Theme.of(context).colorScheme.primary,
             child: Column(
               children: [
                 const Text("My Body",
                   style: TextStyle(
-                    fontSize: 32
+                    fontSize: 50
                   ),
                 ),
                 Row(
@@ -123,27 +129,51 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Container(
                       width : 200,
-                      child: Center(
-                        child: Text("BMI",
+                      child: Text("BMI",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 20
+                              fontSize: 25,
                           ),
+                        ),
+                    ),
+                    Container(
+                      width : 200,
+                      child: Text("Body fat %",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 25,
+
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width : 200,
+                      child: Text("17,69\nThinness",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
                         ),
                       ),
                     ),
                     Container(
                       width : 200,
-                      child: Center(
-                        child: Text("Body fat percentage",
-                          style: TextStyle(
-                              fontSize: 20,
+                      child: Text("17.5%",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
 
-                          ),
                         ),
                       ),
                     )
                   ],
-                )
+                ),
+                Text("Ideal Weight", style: TextStyle(fontSize: 30)),
+                Text("49,2-66,2Kg", style: TextStyle(fontSize: 20))
               ],
             ),
           ),
@@ -170,6 +200,23 @@ class _ProfilePageState extends State<ProfilePage> {
                 )
             )
           ],
+        ),
+        Container(
+          margin: const EdgeInsets.only(bottom: 25.0),
+          child: null,
+        ),
+        TextButton(onPressed: () {},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.settings),
+                const Text("More Settings",
+                  style: TextStyle(
+                      fontSize: 40
+                  ),
+                )
+              ],
+            )
         )
       ],
     );
@@ -179,18 +226,19 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation : 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
+
         centerTitle: true,
         leading: BackButton(
-          color: Colors.white,
+          color : Theme.of(context).colorScheme.onPrimary,
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
-      backgroundColor: Colors.black87,
       body: _listViewBody(),
     );
   }

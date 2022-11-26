@@ -124,7 +124,6 @@ class _ServicesState extends State<Services> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
       appBar: AppBar(
         title: const Center(
           child: Text('Book Services'),
@@ -161,7 +160,8 @@ class _ServicesState extends State<Services> {
                                   context, service.a);
                               if (date == null) return;
                               setState(() =>
-                                  reservations.add(Pair(date, service.a)));
+                                  reservations.add(Pair(date, service.a))
+                              );
                             })
                       ).toList(),
 
@@ -270,7 +270,7 @@ Future<DateTime?> _showReservationPicker(
                   const SizedBox(height: 10),
                   TextButton.icon(
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
+                      foregroundColor: Colors.white,
                       textStyle: const TextStyle(fontSize: 20),
                       side: const BorderSide(
                         color: Colors.black45,
@@ -317,9 +317,7 @@ Future<DateTime?> _showReservationPicker(
               TextButton(
                 onPressed: () => Navigator.pop(context, null),
                 child: const Text('Cancel'),
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.red,
-                ),
+
               ),
               TextButton(
                   onPressed: () {
@@ -345,7 +343,6 @@ Future<DateTime?> _showReservationPicker(
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.orange,
                     textStyle: const TextStyle(fontWeight: FontWeight.bold)
                   ),
                   child: const Text('Book'))

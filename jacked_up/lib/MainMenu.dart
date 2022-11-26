@@ -3,6 +3,7 @@ import 'package:jacked_up/MenuOptions.dart';
 import 'package:jacked_up/ProfileButton.dart';
 
 import 'GymKey.dart';
+import 'MessagePM.dart';
 
 void main() => runApp(const MainMenu());
 
@@ -13,10 +14,7 @@ class MainMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
-    );
+    return const MyStatefulWidget();
   }
 }
 
@@ -32,25 +30,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final ScrollController _homeController = ScrollController();
 
   Widget _listViewBody() {
-    return Column(
+    return SafeArea(
+        child: Column(
       children: <Widget>[
         ProfileButton(index: 0, onPress: () => {}),
         MenuOptions()
       ],
-    );
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _listViewBody(),
-      backgroundColor: Colors.black87,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        backgroundColor: Colors.black87,
-        selectedItemColor: Color.fromRGBO(85, 122, 250, 1),
         iconSize: 42,
-        unselectedItemColor: Colors.grey,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.qr_code),
@@ -90,6 +85,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   curve: Curves.easeOut,
                 );
               }
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MessagePM())
+              );
               break;
           }
           setState(
