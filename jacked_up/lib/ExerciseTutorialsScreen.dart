@@ -11,11 +11,11 @@ enum ScreenID {
 }
 
 class ExerciseGroupButton extends StatelessWidget {
-  const ExerciseGroupButton(
+  ExerciseGroupButton(
       {super.key, required this.title});
 
   final String title;
-
+  
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -33,7 +33,9 @@ class ExerciseGroupButton extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => GroupExercisesScreen(title: title)),
+                    builder: (context) => GroupExercisesScreen(title: title),
+                  settings: RouteSettings(arguments: ModalRoute.of(context)!.settings.arguments)
+                ),
               );
             },
             child: Container(
@@ -55,7 +57,9 @@ class ExerciseGroupButton extends StatelessWidget {
 }
 
 class ExerciseTutorialsScreen extends StatefulWidget {
-  const ExerciseTutorialsScreen({Key? key}) : super(key: key);
+  const ExerciseTutorialsScreen({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
   State<ExerciseTutorialsScreen> createState() =>
@@ -68,8 +72,8 @@ class _ExerciseTutorialsScreenState extends State<ExerciseTutorialsScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
-          title: const Center(
-            child: Text('Exercises'),
+          title: Center(
+            child: Text(widget.title),
           ),
         ),
         body: Column(
@@ -80,17 +84,17 @@ class _ExerciseTutorialsScreenState extends State<ExerciseTutorialsScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Expanded(
                       child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: ExerciseGroupButton(
                               title: "Show All"))),
                   Expanded(
                       child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: ExerciseGroupButton(
-                            title: "Chest",
+                            title: "Chest"
                           )))
                 ],
               ),
@@ -99,18 +103,18 @@ class _ExerciseTutorialsScreenState extends State<ExerciseTutorialsScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Expanded(
                       child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: ExerciseGroupButton(
-                            title: "Triceps",
+                            title: "Triceps"
                           ))),
                   Expanded(
                       child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: ExerciseGroupButton(
-                            title: "Legs",
+                            title: "Legs"
                           )))
                 ],
               ),
@@ -119,18 +123,18 @@ class _ExerciseTutorialsScreenState extends State<ExerciseTutorialsScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Expanded(
                       child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: ExerciseGroupButton(
-                            title: "Abdominal",
+                            title: "Abdominal"
                           ))),
                   Expanded(
                       child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: ExerciseGroupButton(
-                            title: "Back",
+                            title: "Back"
                           )))
                 ],
               ),
@@ -139,18 +143,18 @@ class _ExerciseTutorialsScreenState extends State<ExerciseTutorialsScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Expanded(
                       child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: ExerciseGroupButton(
-                            title: "Biceps",
+                            title: "Biceps"
                           ))),
                   Expanded(
                       child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: ExerciseGroupButton(
-                            title: "Calves",
+                            title: "Calves"
                           )))
                 ],
               ),

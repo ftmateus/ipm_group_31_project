@@ -39,9 +39,9 @@ Map<String, List<Exercise>> allExercises = {
 };
 
 List<Exercise> chestExercises = [
-  Exercise('Push Ups' , [Muscle.chest], 1166, 667, ['assets/images/pushups.png', 'assets/images/pushupslist.png'], false),
-  Exercise('Barbell Bench Press' , [Muscle.chest], 1166, 667, ['assets/images/barbellbenchpress.png', 'assets/images/barbellbenchpresslist.png'], false),
-  Exercise('Cable Crossover' , [Muscle.chest], 1166, 667, ['assets/images/cablecrossover.png', 'assets/images/cablecrossoverlist.png'], false),
+  Exercise('Push Ups' , [Muscle.chest], 10, 5, ['assets/images/pushups.png', 'assets/images/pushupslist.png'], false),
+  Exercise('Barbell Bench Press' , [Muscle.chest], 10, 5, ['assets/images/barbellbenchpress.png', 'assets/images/barbellbenchpresslist.png'], false),
+  Exercise('Cable Crossover' , [Muscle.chest], 10, 5, ['assets/images/cablecrossover.png', 'assets/images/cablecrossoverlist.png'], false),
 ];
 
 List<Exercise> tricepsExercises = [
