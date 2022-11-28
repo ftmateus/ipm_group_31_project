@@ -3,6 +3,8 @@ import 'package:jacked_up/RegisterScreenSecond.dart';
 
 import 'SignInScreen.dart';
 
+import 'MainMenu.dart';
+
 class RegisterScreen extends StatefulWidget {
 
   const RegisterScreen({Key? key}) : super(key: key);
@@ -197,11 +199,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(title: const Text('Back'),
+        appBar: AppBar(
           titleSpacing: 0,
           centerTitle: false,
           backgroundColor: Colors.transparent,
-          elevation: 0,),
+          elevation: 0
+        ),
       body: Center(
     child: Column(
     mainAxisSize: MainAxisSize.min,
@@ -229,7 +232,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 5),
                 checkBoxButton(),
                 signUpButton(),
-                const SizedBox(height: 10)
+                const SizedBox(height: 8)
               ],
             ),
           ),

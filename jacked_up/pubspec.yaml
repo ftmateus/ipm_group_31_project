@@ -29,6 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_lorem: ^2.0.0
+  filter_list: ^1.0.2
+  assorted_layout_widgets: ^7.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -38,6 +41,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build_runner:
+  flutter_gen_runner:
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
