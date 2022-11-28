@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'ExerciseTutorialsScreen.dart';
+//import 'ExerciseTutorialsScreen.dart';
+import 'SignInScreen.dart';
 
 void main() => runApp(const Home());
 
@@ -8,9 +9,18 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+   /* return const MaterialApp(
         debugShowCheckedModeBanner: false,
         //theme: ,
-        home: ExerciseTutorialsScreen());
+        home: ExerciseTutorialsScreen());*/
+    UserInfo defaultUser = UserInfo('email', 'Joao', 'Barros');
+    return  MaterialApp(
+        //theme: ThemeData(
+        //colorSchemeSeed: const Color(0xff3b01f8), useMaterial3: true),
+        // theme: ,
+        debugShowCheckedModeBanner: false,
+        home:
+          SignInScreen(userInfo: defaultUser)
+    );
   }
 }
