@@ -3,10 +3,12 @@ import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'TrainingPlan.dart';
 
 class ExerciseExecutionTile extends StatelessWidget {
-  const ExerciseExecutionTile({Key? key, required this.exerciseExecution})
+  ExerciseExecutionTile({Key? key, required this.exerciseExecution, this.isCurrent = false})
       : super(key: key);
 
   final ExerciseExecution exerciseExecution;
+  final bool isCurrent;
+  bool checked = true;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,13 @@ class ExerciseExecutionTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                   child: Text("Sets: ${exerciseExecution.sets}"),
+                ),
+                if(isCurrent) Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0, 0),
+                  child:  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.check_circle, color: checked ? Colors.green : Colors.white, size: 32),
+                  ),
                 )
               ],
             ),
@@ -55,11 +64,12 @@ class ExerciseExecutionTile extends StatelessWidget {
 
 class TrainingPlanScreen extends StatefulWidget {
   TrainingPlanScreen(
-      {super.key, required this.title, required this.trainingPlan, this.edit = false});
+      {super.key, required this.title, required this.trainingPlan, this.edit = false, this.isCurrent = false});
 
   final String title;
   TrainingPlan trainingPlan;
   final bool edit;
+  final bool isCurrent;
 
   @override
   State<TrainingPlanScreen> createState() => _TrainingPlanScreenState();
@@ -179,7 +189,9 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                           var exerciseExecution =
                               widget.trainingPlan.exercises[index];
                           return ExerciseExecutionTile(
-                              exerciseExecution: exerciseExecution);
+                              exerciseExecution: exerciseExecution,
+                            isCurrent: this.widget.isCurrent,
+                        );
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return Row(
@@ -203,7 +215,7 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
         onPressed: () => setState(() {}),
         tooltip: 'Add exercise',
         child: const Icon(Icons.add),
-      ) : null,
+        ) : null,
     );
   }
 }

@@ -100,7 +100,7 @@ class _MainMenuState extends State<MainMenu> {
                   builder: (context) => TrainingPlanScreen(
                       title: (weekdaysNumbers[DateTime.now().weekday] ?? "") + "'s training plan",
                       trainingPlan: allTrainingPlans.values.last.last,
-                      edit: false),
+                      edit: false, isCurrent: true,),
                 ))
           },
           tooltip: 'Today\'s Plan',
