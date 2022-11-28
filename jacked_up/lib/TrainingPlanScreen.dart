@@ -3,10 +3,12 @@ import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'TrainingPlan.dart';
 
 class ExerciseExecutionTile extends StatelessWidget {
-  const ExerciseExecutionTile({Key? key, required this.exerciseExecution})
+  ExerciseExecutionTile({Key? key, required this.exerciseExecution, this.isCurrent = false})
       : super(key: key);
 
   final ExerciseExecution exerciseExecution;
+  final bool isCurrent;
+  bool checked = true;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class ExerciseExecutionTile extends StatelessWidget {
             height: 100,
             width: MediaQuery.of(context).size.width * 0.25,
             decoration: BoxDecoration(
-              border: Border.all(width: 2),
+              border: Border.all(width: 2, color: Colors.white60),
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                   image: AssetImage(
@@ -43,6 +45,13 @@ class ExerciseExecutionTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                   child: Text("Sets: ${exerciseExecution.sets}"),
+                ),
+                if(isCurrent) Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0, 0),
+                  child:  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.check_circle, color: checked ? Colors.green : Colors.white, size: 32),
+                  ),
                 )
               ],
             ),
@@ -54,10 +63,13 @@ class ExerciseExecutionTile extends StatelessWidget {
 }
 
 class TrainingPlanScreen extends StatefulWidget {
-  TrainingPlanScreen({super.key, required this.title, required this.trainingPlan});
+  TrainingPlanScreen(
+      {super.key, required this.title, required this.trainingPlan, this.edit = false, this.isCurrent = false});
 
   final String title;
   TrainingPlan trainingPlan;
+  final bool edit;
+  final bool isCurrent;
 
   @override
   State<TrainingPlanScreen> createState() => _TrainingPlanScreenState();
@@ -70,7 +82,9 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text(widget.title)),
+        title: Text(widget.title),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,11 +101,12 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(width: 2),
+                          border: Border.all(width: 2, color: Colors.white60),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         alignment: Alignment.center,
-                        margin: EdgeInsets.all(12),
+                        margin: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.only(top: 15),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
@@ -100,8 +115,11 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Duration:"),
-                                Text("${widget.trainingPlan.totDuration} min"),
+                                const Text("  Duration:",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(
+                                    "  ${widget.trainingPlan.totDuration} min"),
                               ],
                             )
                           ],
@@ -114,11 +132,12 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(width: 2),
+                          border: Border.all(width: 2, color: Colors.white60),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         alignment: Alignment.center,
-                        margin: EdgeInsets.all(12),
+                        margin: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.only(top: 15),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
@@ -127,8 +146,11 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Calories burned:"),
-                                Text("${widget.trainingPlan.totCaloriesBurned} kcal"),
+                                const Text(" Calories burned:",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(
+                                    " ${widget.trainingPlan.totCaloriesBurned} kcal"),
                               ],
                             )
                           ],
@@ -147,24 +169,29 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                   decoration: const ShapeDecoration(
                       shape: NonUniformRoundedRectangleBorder(
                           hideBottomSide: true,
-                          side: BorderSide(width: 2),
+                          side: BorderSide(width: 2, color: Colors.white60),
                           borderRadius:
                               BorderRadius.all(Radius.elliptical(15, 15)))),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(8.0, 8.0, 0, 8.0),
-                        child: Text("List of exercises:"),
+                        padding: EdgeInsets.fromLTRB(10.0, 14.0, 0, 8.0),
+                        child: Text("List of exercises:",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
                       ),
                       ListView.separated(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: widget.trainingPlan.exercises.length,
                         itemBuilder: (context, index) {
-                          var exerciseExecution = widget.trainingPlan.exercises[index];
+                          var exerciseExecution =
+                              widget.trainingPlan.exercises[index];
                           return ExerciseExecutionTile(
-                              exerciseExecution: exerciseExecution);
+                              exerciseExecution: exerciseExecution,
+                            isCurrent: this.widget.isCurrent,
+                        );
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return Row(
@@ -184,11 +211,11 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
               ))
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: this.widget.edit ? FloatingActionButton(
         onPressed: () => setState(() {}),
-        tooltip: 'Increment Counter',
+        tooltip: 'Add exercise',
         child: const Icon(Icons.add),
-      ),
+        ) : null,
     );
   }
 }

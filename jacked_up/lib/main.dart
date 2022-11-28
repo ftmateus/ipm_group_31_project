@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:jacked_up/Routine.dart';
 //import 'ExerciseTutorialsScreen.dart';
+import 'RoutineScreen.dart';
+import 'RoutinesScreen.dart';
 import 'SignInScreen.dart';
 
 void main() => runApp(const Home());
@@ -77,8 +80,8 @@ class Home extends StatelessWidget {
         themeMode: ThemeMode.dark,
 
         debugShowCheckedModeBanner: false,
-        home:
-          SignInScreen(userInfo: defaultUser)
+        home: SignInScreen(userInfo: defaultUser,)
+
 
     );
   }

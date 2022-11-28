@@ -65,8 +65,9 @@ class _MessagePMState extends State<MessagePM> {
               ),
               Row(
                 children: [
+                  Padding(padding: EdgeInsets.only(left:10)),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.85,
+                    width: MediaQuery.of(context).size.width * 0.80,
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),

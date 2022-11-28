@@ -10,21 +10,12 @@ class Routine {
 }
 
 List<Routine> allRoutines = [
-  Routine('Test1', {
+  Routine('Quick Biceps', {
     'SUN': null,
     'MON': defaultTrainingPlans[0],
     'TUE': null,
     'WED': null,
-    'THURS': defaultTrainingPlans[0],
-    'FRI': null,
-    'SAT': null,
-  }),
-  Routine('Test2', {
-    'SUN': defaultTrainingPlans[0],
-    'MON': null,
-    'TUE': null,
-    'WED': defaultTrainingPlans[0],
-    'THURS': null,
+    'THU': defaultTrainingPlans[0],
     'FRI': null,
     'SAT': null,
   }),

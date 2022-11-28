@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:jacked_up/MenuOptions.dart';
 import 'package:jacked_up/ProfileButton.dart';
+import 'package:jacked_up/TrainingPlanScreen.dart';
 
 import 'GymKey.dart';
 import 'MessagePM.dart';
 import 'SignInScreen.dart';
+import 'TrainingPlan.dart';
 
 // void main() => runApp(const MainMenu());
 
@@ -20,6 +22,16 @@ import 'SignInScreen.dart';
 //     return const MyStatefulWidget();
 //   }
 // }
+
+Map<int, String> weekdaysNumbers = {
+  1 : 'Monday',
+  2 : 'Tuesday',
+  3 : 'Wednesday',
+  4 : 'Thursday',
+  5 : 'Friday',
+  6 : 'Saturday',
+  7 : 'Sunday'
+};
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key, required this.userInfo});
@@ -57,17 +69,22 @@ class _MainMenuState extends State<MainMenu> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(onPressed: () {
-                showModal(context);
-              }, icon: const Icon(Icons.qr_code, size : 60)),
+              const Padding(padding: EdgeInsets.all(15)),
+              IconButton(
+                  onPressed: () {
+                    showModal(context);
+                  },
+                  icon: const Icon(Icons.qr_code, size: 60)),
               const Spacer(),
-              IconButton(onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MessagePM())
-                );
-              }, icon: const Icon(Icons.message, size : 60)),
-              const Padding(padding: EdgeInsets.all(15))
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MessagePM()));
+                  },
+                  icon: const Icon(Icons.message, size: 60)),
+              const Padding(padding: EdgeInsets.all(30))
             ],
           ),
         ),
@@ -76,9 +93,19 @@ class _MainMenuState extends State<MainMenu> {
         width: 80,
         height: 80,
         child: FloatingActionButton(
-          onPressed: () => setState(() {}),
-          tooltip: 'Increment Counter',
-          child: const Icon(Icons.play_arrow, size: 50),
+          backgroundColor: Colors.white,
+          onPressed: () => {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TrainingPlanScreen(
+                      title: (weekdaysNumbers[DateTime.now().weekday] ?? "") + "'s training plan",
+                      trainingPlan: allTrainingPlans.values.last.last,
+                      edit: false, isCurrent: true,),
+                ))
+          },
+          tooltip: 'Today\'s Plan',
+          child: const Icon(Icons.play_arrow, size: 50, color: Colors.blueAccent,),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

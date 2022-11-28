@@ -57,7 +57,7 @@ class ExerciseGroupButton extends StatelessWidget {
 }
 
 class ExerciseTutorialsScreen extends StatefulWidget {
-  const ExerciseTutorialsScreen({Key? key, this.title = "Exercise Tutorials"}) : super(key: key);
+  const ExerciseTutorialsScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -72,7 +72,7 @@ class _ExerciseTutorialsScreenState extends State<ExerciseTutorialsScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          title: Text('Exercises'),
+          title: Text(widget.title),
           centerTitle: true,
         ),
         body: Column(

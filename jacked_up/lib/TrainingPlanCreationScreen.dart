@@ -23,7 +23,7 @@ class ExerciseExecutionTile extends StatelessWidget {
             height: 100,
             width: MediaQuery.of(context).size.width * 0.25,
             decoration: BoxDecoration(
-              border: Border.all(width: 2),
+              border: Border.all(width: 2, color: Colors.white60),
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                   image: AssetImage(
@@ -141,7 +141,7 @@ class _TrainingPlanCreationScreenState
       appBar: AppBar(
         leadingWidth: 100,
         leading: cancelButton(),
-        title: Center(child: Text(widget.title)),
+        title: Center(child: Text(widget.title, style: TextStyle(fontSize: 22),)),
         actions: [
           createPlanButton()
         ],
@@ -161,11 +161,12 @@ class _TrainingPlanCreationScreenState
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(width: 2),
+                          border: Border.all(width: 2, color: Colors.white60),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         alignment: Alignment.center,
-                        margin: EdgeInsets.all(12),
+                        margin: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.only(top:15),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
@@ -174,8 +175,8 @@ class _TrainingPlanCreationScreenState
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Duration:"),
-                                Text("${plan.totDuration} min"),
+                                const Text("  Duration:", style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text("  ${plan.totDuration} min"),
                               ],
                             )
                           ],
@@ -188,11 +189,12 @@ class _TrainingPlanCreationScreenState
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(width: 2),
+                          border: Border.all(width: 2, color: Colors.white60),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         alignment: Alignment.center,
-                        margin: EdgeInsets.all(12),
+                        margin: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.only(top:15),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
@@ -201,8 +203,8 @@ class _TrainingPlanCreationScreenState
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Calories burned:"),
-                                Text("${plan.totCaloriesBurned} kcal"),
+                                const Text(" Calories burned:", style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text(" ${plan.totCaloriesBurned} kcal"),
                               ],
                             )
                           ],
@@ -221,15 +223,15 @@ class _TrainingPlanCreationScreenState
                   decoration: const ShapeDecoration(
                       shape: NonUniformRoundedRectangleBorder(
                           hideBottomSide: true,
-                          side: BorderSide(width: 2),
+                          side: BorderSide(width: 2, color: Colors.white60),
                           borderRadius:
                               BorderRadius.all(Radius.elliptical(15, 15)))),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(8.0, 8.0, 0, 8.0),
-                        child: Text("List of exercises:"),
+                        padding: EdgeInsets.fromLTRB(10.0, 14.0, 0, 8.0),
+                        child: Text("List of exercises:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       ),
                       ListView.separated(
                         scrollDirection: Axis.vertical,
@@ -265,7 +267,7 @@ class _TrainingPlanCreationScreenState
               builder: (context) => const ExerciseTutorialsScreen(
                 title: 'Choose Exercise',
               ),
-            settings: const RouteSettings(arguments: false)
+            //settings: const RouteSettings(arguments: true)
           ),
         ).then((exerciseExecution) {
           setState(() {
@@ -273,6 +275,9 @@ class _TrainingPlanCreationScreenState
           });
         }),
         child: const Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        elevation: 3,
       ),
     );
   }

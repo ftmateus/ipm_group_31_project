@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jacked_up/SignInScreen.dart';
 
+
+
 class RegisterScreenSecond extends StatefulWidget {
   const RegisterScreenSecond({super.key, required this.userInfo});
 
