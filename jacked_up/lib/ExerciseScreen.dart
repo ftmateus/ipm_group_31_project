@@ -15,7 +15,11 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("View Exercise"), centerTitle: true,),
+        appBar: AppBar(
+          title: const Text("View Exercise"),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+        ),
         body: Column(
           children: [
             Expanded(

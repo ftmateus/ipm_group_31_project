@@ -22,23 +22,24 @@ class _RoutineTileState extends State<RoutineTile> {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-          side: BorderSide(width: 2.0),
-          borderRadius: BorderRadius.circular(12)),
+          side: BorderSide(width: 2.0, color: Colors.white),
+          borderRadius: BorderRadius.circular(12)
+      ),
       elevation: 3,
       color: Colors.black38,
       child: Row(
         children: [
           Expanded(
-            flex: 30,
+            flex: 20,
             child: Container(
               clipBehavior: Clip.antiAlias,
-              height: 100,
+              height: 80,
               width: MediaQuery.of(context).size.width * 0.25,
               decoration: BoxDecoration(
-                border: Border.all(width: 2),
+                border: Border.all(width: 2, color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(Icons.ac_unit_rounded),
+              child: Icon(Icons.schedule, size: 50,),
             ),
           ),
           Expanded(
@@ -49,7 +50,7 @@ class _RoutineTileState extends State<RoutineTile> {
                   Text(
                     widget.routine.name,
                     style: const TextStyle(
-                      fontSize: 12.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -76,10 +77,13 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
     return Scaffold(
       endDrawer: Drawer(
         backgroundColor: Colors.blue,
+
       ),
       appBar: AppBar(
-        title: Center(child: Text('Routines')),
+        title: Text('Routines'),
         actions: [new Container()],
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Center(
         child: Column(
@@ -112,7 +116,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(bottom: 15),
               child: InkWell(
                 onTap: () => Navigator.push(
                   context,
@@ -130,11 +134,12 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                   });
                 }),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.75,
+                  width: MediaQuery.of(context).size.width * 0.85,
                   height: 50,
                   child: Card(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                    ),
                     elevation: 3,
                     color: Colors.green,
                     child: const Center(child: Text("CREATE ROUTINE")),

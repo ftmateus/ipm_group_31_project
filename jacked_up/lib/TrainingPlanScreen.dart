@@ -54,10 +54,12 @@ class ExerciseExecutionTile extends StatelessWidget {
 }
 
 class TrainingPlanScreen extends StatefulWidget {
-  TrainingPlanScreen({super.key, required this.title, required this.trainingPlan});
+  TrainingPlanScreen(
+      {super.key, required this.title, required this.trainingPlan, this.edit = false});
 
   final String title;
   TrainingPlan trainingPlan;
+  final bool edit;
 
   @override
   State<TrainingPlanScreen> createState() => _TrainingPlanScreenState();
@@ -71,7 +73,8 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-      centerTitle: true,
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,7 +96,7 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                         ),
                         alignment: Alignment.center,
                         margin: const EdgeInsets.all(12),
-                        padding: const EdgeInsets.only(top:15),
+                        padding: const EdgeInsets.only(top: 15),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
@@ -102,8 +105,11 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("  Duration:", style: TextStyle(fontWeight: FontWeight.bold)),
-                                Text("  ${widget.trainingPlan.totDuration} min"),
+                                const Text("  Duration:",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(
+                                    "  ${widget.trainingPlan.totDuration} min"),
                               ],
                             )
                           ],
@@ -121,7 +127,7 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                         ),
                         alignment: Alignment.center,
                         margin: const EdgeInsets.all(12),
-                        padding: const EdgeInsets.only(top:15),
+                        padding: const EdgeInsets.only(top: 15),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
@@ -130,8 +136,11 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(" Calories burned:", style: TextStyle(fontWeight: FontWeight.bold)),
-                                Text(" ${widget.trainingPlan.totCaloriesBurned} kcal"),
+                                const Text(" Calories burned:",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(
+                                    " ${widget.trainingPlan.totCaloriesBurned} kcal"),
                               ],
                             )
                           ],
@@ -158,14 +167,17 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.fromLTRB(10.0, 14.0, 0, 8.0),
-                        child: Text("List of exercises:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        child: Text("List of exercises:",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
                       ),
                       ListView.separated(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: widget.trainingPlan.exercises.length,
                         itemBuilder: (context, index) {
-                          var exerciseExecution = widget.trainingPlan.exercises[index];
+                          var exerciseExecution =
+                              widget.trainingPlan.exercises[index];
                           return ExerciseExecutionTile(
                               exerciseExecution: exerciseExecution);
                         },
@@ -187,11 +199,11 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
               ))
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: this.widget.edit ? FloatingActionButton(
         onPressed: () => setState(() {}),
         tooltip: 'Add exercise',
         child: const Icon(Icons.add),
-      ),
+      ) : null,
     );
   }
 }

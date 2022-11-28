@@ -4,8 +4,7 @@ import 'Routine.dart';
 import 'TrainingPlan.dart';
 
 class TrainingPlanTile extends StatelessWidget {
-  const TrainingPlanTile({Key? key, required this.planByDay})
-      : super(key: key);
+  const TrainingPlanTile({Key? key, required this.planByDay}) : super(key: key);
 
   final MapEntry<String, TrainingPlan?> planByDay;
 
@@ -14,27 +13,32 @@ class TrainingPlanTile extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 15,
-            child: Center(child: Text(planByDay.key))),
+            flex: 15,
+            child: Center(
+                child: Text(
+              planByDay.key,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ))),
         Expanded(
           flex: 80,
           child: InkWell(
             onTap: () {},
             child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: Colors.red),
-                  borderRadius: BorderRadius.all(Radius.circular(12))
-                ),
-                child: Center(
-                  child: Text(planByDay.value == null?'':planByDay.value!.name),
+              height: 50,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      width: 2, color: Theme.of(context).colorScheme.primary),
+                  borderRadius: const BorderRadius.all(Radius.circular(12))),
+              child: Center(
+                child: Text(
+                  planByDay.value == null ? '' : planByDay.value!.name,
+                  style: const TextStyle(fontSize: 25),
                 ),
               ),
+            ),
           ),
         ),
-        Expanded(
-          flex: 17,
-            child: Text("button")),
+        Padding(padding: EdgeInsets.only(right: 20))
       ],
     );
   }
@@ -51,22 +55,26 @@ class RoutineScreen extends StatefulWidget {
 }
 
 class _RoutineScreenState extends State<RoutineScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text(widget.title)),
+          title: Text(widget.title),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          centerTitle: true,
         ),
         body: Padding(
-          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+          padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
           child: ListView.separated(
             itemCount: widget.routine.plansByDay.length,
             itemBuilder: (context, index) {
-              return TrainingPlanTile(planByDay: List.of(widget.routine.plansByDay.entries)[index]);
+              return TrainingPlanTile(
+                  planByDay: List.of(widget.routine.plansByDay.entries)[index]);
             },
             separatorBuilder: (BuildContext context, int index) {
-              return Container(height: 30,);
+              return Container(
+                height: 30,
+              );
             },
           ),
         ));

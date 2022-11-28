@@ -155,7 +155,7 @@ class _RoutineCreationScreenState
         appBar: AppBar(
           leadingWidth: 100,
           leading: cancelButton(),
-          title: Center(child: Text(widget.title)),
+          title: Center(child: Text(widget.title, style: TextStyle(fontSize: 20),)),
           actions: [
             createPlanButton()
           ],
