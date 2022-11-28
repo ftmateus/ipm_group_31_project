@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jacked_up/ExerciseScreen.dart';
 import 'package:jacked_up/ExerciseTutorialsScreen.dart';
+import 'package:jacked_up/RoutinesScreen.dart';
 import 'package:jacked_up/TrainingPlansScreen.dart';
 
 import 'BookService.dart';
@@ -80,7 +81,12 @@ class MenuOptions extends StatelessWidget
             MenuOption(
                 title: "Routines",
                 image: 'assets/images/routine_main_menu_icon.jpg',
-                onPress: () {}
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RoutinesScreen()),
+                  );
+                }
             ),
             MenuOption(
                 title: "Training plans",
@@ -93,12 +99,15 @@ class MenuOptions extends StatelessWidget
                 }
             ),
             MenuOption(
-                title: "Exercises Tutorials",
+                title: "Exercise Tutorials",
                 image: 'assets/images/exercises_main_menu_icon.jpg',
                 onPress: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ExerciseTutorialsScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const ExerciseTutorialsScreen(title: "Exercises"),
+                      settings: RouteSettings(arguments: true)
+                    ),
                   );
                 }
             ),

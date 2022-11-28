@@ -31,7 +31,7 @@ class _TrainingPlanTileState extends State<TrainingPlanTile>{
           child: Container(
             height: 50,
             decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.red),
+                border: Border.all(width: 2, color: Colors.blue),
                 borderRadius: BorderRadius.all(Radius.circular(12))
             ),
             child: Center(
@@ -155,7 +155,7 @@ class _RoutineCreationScreenState
         appBar: AppBar(
           leadingWidth: 100,
           leading: cancelButton(),
-          title: Center(child: Text(widget.title)),
+          title: Center(child: Text(widget.title, style: TextStyle(fontSize: 20),)),
           actions: [
             createPlanButton()
           ],

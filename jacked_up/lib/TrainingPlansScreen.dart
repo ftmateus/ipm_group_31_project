@@ -114,7 +114,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool viewOnly = ModalRoute.of(context)?.settings.arguments as bool;
+    bool viewOnly = ModalRoute.of(context)?.settings.arguments != null;
     return Scaffold(
       endDrawer: Drawer(
         backgroundColor: Colors.blue,
@@ -123,6 +123,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
         title:Text('Training Plans'),
         centerTitle: true,
         actions: [new Container()],
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Center(
         child: Column(
@@ -157,7 +158,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
             viewOnly
                 ? Container()
                 : Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(bottom: 15),
                     child: InkWell(
                       onTap: () => Navigator.push(
                         context,
@@ -177,7 +178,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
                         });
                       }),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.75,
+                        width: MediaQuery.of(context).size.width * 0.85,
                         height: 50,
                         child: Card(
                           shape: RoundedRectangleBorder(

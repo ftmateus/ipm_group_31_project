@@ -219,6 +219,7 @@ class _GroupExercisesScreenState extends State<GroupExercisesScreen> {
         title: Text(widget.title),
         centerTitle: true,
         actions: [new Container()],
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Center(
         child: Column(
