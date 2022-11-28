@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jacked_up/ExerciseScreen.dart';
 import 'package:jacked_up/ExerciseTutorialsScreen.dart';
+import 'package:jacked_up/TrainingPlansScreen.dart';
 
 import 'BookService.dart';
 
@@ -84,7 +85,12 @@ class MenuOptions extends StatelessWidget
             MenuOption(
                 title: "Training plans",
                 image: 'assets/images/training_plan_main_menu_icon.jpg',
-                onPress: () {}
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const TrainingPlansScreen()),
+                  );
+                }
             ),
             MenuOption(
                 title: "Exercises Tutorials",
