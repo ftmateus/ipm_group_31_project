@@ -69,8 +69,52 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
   List<TrainingPlan> trainingPlans =
       allTrainingPlans.values.expand((plans) => plans).toList();
 
+  Offset _tapPosition = Offset.zero;
+  void _getTapPosition(TapDownDetails details) {
+    final RenderBox referenceBox = context.findRenderObject() as RenderBox;
+    setState(() {
+      _tapPosition = referenceBox.globalToLocal(details.globalPosition);
+    });
+  }
+
+  // This function will be called when you long press on the blue box or the image
+  void _showContextMenu(BuildContext context, TrainingPlan plan) async {
+    final RenderObject? overlay =
+    Overlay.of(context)?.context.findRenderObject();
+
+    final result = await showMenu(
+        context: context,
+
+        // Show the context menu at the tap location
+        position: RelativeRect.fromRect(
+            Rect.fromLTWH(_tapPosition.dx, _tapPosition.dy, 30, 30),
+            Rect.fromLTWH(0, 0, overlay!.paintBounds.size.width,
+                overlay.paintBounds.size.height)),
+
+        // set a list of choices for the context menu
+        items: [
+          const PopupMenuItem(
+            value: 'view details',
+            child: Text('View details'),
+          ),
+        ]);
+
+    // Implement the logic for each choice here
+    switch (result) {
+      case 'view details':
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => TrainingPlanScreen(title: plan.name, trainingPlan: plan)
+          )
+        );
+        break;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    bool viewOnly = ModalRoute.of(context)?.settings.arguments as bool;
     return Scaffold(
       endDrawer: Drawer(
         backgroundColor: Colors.blue,
@@ -110,39 +154,43 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
                 }),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 15),
-              child: InkWell(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TrainingPlanCreationScreen(
-                            title:
-                                'Custom Plan ${allTrainingPlans['custom']?.length}',
-                          )),
-                ).then((plan) {
-                  setState(() {
-                    if (plan != null) {
-                      allTrainingPlans['custom']?.add(plan);
-                      trainingPlans = allTrainingPlans.values
-                          .expand((plans) => plans)
-                          .toList();
-                    }
-                  });
-                }),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  height: 50,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                    elevation: 3,
-                    color: Colors.green,
-                    child: const Center(child: Text("CREATE TRAINING PLAN")),
+            viewOnly
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TrainingPlanCreationScreen(
+                                  title:
+                                      'Custom Plan ${allTrainingPlans['custom']?.length}',
+                                )),
+                      ).then((plan) {
+                        setState(() {
+                          if (plan != null) {
+                            allTrainingPlans['custom']?.add(plan);
+                            trainingPlans = allTrainingPlans.values
+                                .expand((plans) => plans)
+                                .toList();
+                          }
+                        });
+                      }),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.75,
+                        height: 50,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                          elevation: 3,
+                          color: Colors.green,
+                          child:
+                              const Center(child: Text("CREATE TRAINING PLAN")),
+                        ),
+                      ),
+                    ),
+
                   ),
-                ),
-              ),
-            ),
             Expanded(
                 child: Padding(
               padding: const EdgeInsets.fromLTRB(17, 0, 17, 0),
@@ -151,16 +199,20 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
                 itemBuilder: (context, index) {
                   final plan = trainingPlans[index];
                   return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TrainingPlanScreen(
-                                    title: plan.name,
-                                    trainingPlan: plan,
-                                  )),
-                        );
-                      },
+                    onTapDown: (details) => _getTapPosition(details),
+                      onTap: viewOnly
+                          ? () => Navigator.of(context).pop(plan)
+                          : () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TrainingPlanScreen(
+                                          title: plan.name,
+                                          trainingPlan: plan,
+                                        )),
+                              );
+                            },
+                      onLongPress: () => _showContextMenu(context, plan),
                       child: TrainingPlanTile(trainingPlan: plan));
                 },
                 separatorBuilder: (BuildContext context, int index) {
