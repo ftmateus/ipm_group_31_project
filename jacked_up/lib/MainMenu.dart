@@ -57,6 +57,7 @@ class _MainMenuState extends State<MainMenu> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Padding(padding: EdgeInsets.all(15)),
               IconButton(onPressed: () {
                 showModal(context);
               }, icon: const Icon(Icons.qr_code, size : 60)),
@@ -67,7 +68,7 @@ class _MainMenuState extends State<MainMenu> {
                     MaterialPageRoute(builder: (context) => const MessagePM())
                 );
               }, icon: const Icon(Icons.message, size : 60)),
-              const Padding(padding: EdgeInsets.all(15))
+              const Padding(padding: EdgeInsets.all(30))
             ],
           ),
         ),
@@ -77,7 +78,7 @@ class _MainMenuState extends State<MainMenu> {
         height: 80,
         child: FloatingActionButton(
           onPressed: () => setState(() {}),
-          tooltip: 'Increment Counter',
+          tooltip: 'Today\'s Plan',
           child: const Icon(Icons.play_arrow, size: 50),
         ),
       ),
