@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:jacked_up/ExerciseScreen.dart';
 import 'package:jacked_up/GroupExercise.dart';
 
+import 'TrainingPlan.dart';
+
 class ExerciseTile extends StatefulWidget {
-  const ExerciseTile({Key? key, required this.exercise}) : super(key: key);
+  ExerciseTile({Key? key, required this.exercise})
+      : super(key: key);
 
   final Exercise exercise;
 
@@ -12,8 +16,14 @@ class ExerciseTile extends StatefulWidget {
 }
 
 class _ExerciseTileState extends State<ExerciseTile> {
+  final TextEditingController _reps = TextEditingController();
+  final TextEditingController _sets = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
+    bool viewOnly  = ModalRoute.of(context)!.settings.arguments as bool;
+
     return Card(
       shape: RoundedRectangleBorder(
           side: BorderSide(width: 2.0),
@@ -95,24 +105,92 @@ class _ExerciseTileState extends State<ExerciseTile> {
               child: Container(
                 height: 90,
                 alignment: Alignment.topCenter,
-                child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        widget.exercise.isFav = !widget.exercise.isFav;
-                      });
-                    },
-                    child: widget.exercise.isFav
-                        ? const Icon(Icons.star)
-                        : const Icon(Icons.star_outline)),
+                child: Column(
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          setState(() {
+                            widget.exercise.isFav = !widget.exercise.isFav;
+                          });
+                        },
+                        child: widget.exercise.isFav
+                            ? const Icon(Icons.star)
+                            : const Icon(Icons.star_outline)),
+                    Spacer(),
+                    viewOnly
+                        ? Container()
+                        : IconButton(
+                            onPressed: () => _showRepSetInput(widget.exercise),
+                            icon: const Icon(
+                              Icons.add_circle,
+                            ))
+                  ],
+                ),
               ))
         ],
       ),
     );
   }
+
+  inputField(String inputLabel, TextEditingController inputController, Icon inputIcon) {
+    return TextFormField(
+      decoration: InputDecoration(
+        hintText: 'Number of ${inputLabel.toLowerCase()}' ,
+        labelText: inputLabel,
+        icon: inputIcon,
+      ),
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      controller: inputController,
+      validator: (String? value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter a number of ${inputLabel.toLowerCase()}';
+        }
+        return null;
+      },
+    );
+  }
+
+  void _showRepSetInput(Exercise exercise) {
+    showDialog<ExerciseExecution>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        content: setupAlertDialogContainer(),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              var exerciseExecution = ExerciseExecution(exercise, int.parse(_reps.text), int.parse(_sets.text));
+              _reps.clear();
+              _sets.clear();
+              Navigator.of(context)..pop(exerciseExecution)..pop(exerciseExecution)..pop(exerciseExecution);
+            } ,
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget setupAlertDialogContainer() {
+    return Container(
+      height: 120.0, // Change as per your requirement
+      width: 300.0, // Change as per your requirement
+      child: Column(
+        children: [
+          inputField('Reps', _reps, const Icon(Icons.monitor_weight)),
+          inputField('Sets', _sets, const Icon(Icons.monitor_weight))
+        ],
+      ),
+    );
+  }
+
+
 }
 
 class GroupExercisesScreen extends StatefulWidget {
-  const GroupExercisesScreen({Key? key, required this.title}) : super(key: key);
+  GroupExercisesScreen(
+      {Key? key, required this.title})
+      : super(key: key);
 
   final String title;
 
@@ -189,7 +267,9 @@ class _GroupExercisesScreenState extends State<GroupExercisesScreen> {
                                   )),
                         );
                       },
-                      child: ExerciseTile(exercise: exercise));
+                      child: ExerciseTile(
+                        exercise: exercise,
+                      ));
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return Container(height: 7);
