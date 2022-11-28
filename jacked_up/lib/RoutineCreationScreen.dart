@@ -3,30 +3,59 @@ import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:jacked_up/ExerciseTutorialsScreen.dart';
 import 'package:jacked_up/RoutinesScreen.dart';
+import 'package:jacked_up/TrainingPlansScreen.dart';
 import 'Routine.dart';
 import 'TrainingPlan.dart';
 
 class TrainingPlanTile extends StatefulWidget {
-  const TrainingPlanTile({Key? key, required this.planByDay})
+  TrainingPlanTile({Key? key, required this.planByDay, required this.routine})
       : super(key: key);
 
-  final MapEntry<String, TrainingPlan?> planByDay;
+  MapEntry<String, TrainingPlan?> planByDay;
+  Routine routine;
 
   @override
-  State<StatefulWidget> createState() => _RoutineTileState();
+  State<StatefulWidget> createState() => _TrainingPlanTileState();
 }
 
-class _RoutineTileState extends State<RoutineTile>{
+class _TrainingPlanTileState extends State<TrainingPlanTile>{
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onLongPress: () {},
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        child: Row(
-          children: [
-            Text("data")
-          ],
-        )
+    return Row(
+      children: [
+        Expanded(
+            flex: 15,
+            child: Center(child: Text(widget.planByDay.key))),
+        Expanded(
+          flex: 80,
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+                border: Border.all(width: 2, color: Colors.red),
+                borderRadius: BorderRadius.all(Radius.circular(12))
+            ),
+            child: Center(
+              child: Text(widget.planByDay.value == null?'':widget.planByDay.value!.name),
+            ),
+          ),
+        ),
+        Expanded(
+            flex: 17,
+            child: IconButton(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TrainingPlansScreen(),
+                    settings: RouteSettings(arguments: true)
+                  )).then((plan) {
+                    setState(() {
+                      widget.routine.plansByDay.update(widget.planByDay.key, (value) => plan);
+                      widget.planByDay = MapEntry<String, TrainingPlan>(widget.planByDay.key, plan);
+                    });
+              }),
+              icon: Icon(Icons.add_circle),
+            )),
+      ],
     );
   }
 }
@@ -50,7 +79,13 @@ class _RoutineCreationScreenState
   void initState() {
     super.initState();
     routine = Routine(widget.title, {
-
+      'SUN': null,
+      'MON': null,
+      'TUE': null,
+      'WED': null,
+      'THURS': null,
+      'FRI': null,
+      'SAT': null,
     });
   }
 
@@ -118,16 +153,25 @@ class _RoutineCreationScreenState
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leadingWidth: 100,
+          leading: cancelButton(),
           title: Center(child: Text(widget.title)),
+          actions: [
+            createPlanButton()
+          ],
         ),
-        body: ListView.separated(
-          itemCount: routine.plansByDay.length,
-          itemBuilder: (context, index) {
-            return TrainingPlanTile(planByDay: List.of(routine.plansByDay.entries)[index]);
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return Container(height: 7,);
-          },
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: ListView.separated(
+            itemCount: routine.plansByDay.length,
+            itemBuilder: (context, index) {
+              return TrainingPlanTile(planByDay: List.of(routine.plansByDay.entries)[index],
+              routine: routine,);
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Container(height: 30,);
+            },
+          ),
         ));
   }
 }

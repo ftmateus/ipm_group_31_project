@@ -11,17 +11,16 @@ class TrainingPlanTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onLongPress: () {},
-      borderRadius: BorderRadius.all(Radius.circular(12)),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 15,
-              child: Center(child: Text(planByDay.key))),
-          Expanded(
-            flex: 80,
-              child: Container(
+    return Row(
+      children: [
+        Expanded(
+          flex: 15,
+            child: Center(child: Text(planByDay.key))),
+        Expanded(
+          flex: 80,
+          child: InkWell(
+            onTap: () {},
+            child: Container(
                 height: 50,
                 decoration: BoxDecoration(
                   border: Border.all(width: 2, color: Colors.red),
@@ -30,12 +29,13 @@ class TrainingPlanTile extends StatelessWidget {
                 child: Center(
                   child: Text(planByDay.value == null?'':planByDay.value!.name),
                 ),
-              )),
-          Expanded(
-            flex: 17,
-              child: Text("button")),
-        ],
-      )
+              ),
+          ),
+        ),
+        Expanded(
+          flex: 17,
+            child: Text("button")),
+      ],
     );
   }
 }
