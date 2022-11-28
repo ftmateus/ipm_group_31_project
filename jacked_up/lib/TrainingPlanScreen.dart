@@ -186,7 +186,7 @@ class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => setState(() {}),
-        tooltip: 'Increment Counter',
+        tooltip: 'Add exercise',
         child: const Icon(Icons.add),
       ),
     );

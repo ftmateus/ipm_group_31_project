@@ -293,7 +293,7 @@ class _GroupExercisesScreenState extends State<GroupExercisesScreen> {
   }
 
   void _searchExercise(String query) {
-    List<Exercise> suggestions = allExercises[widget.title.toLowerCase()]!;
+    List<Exercise> suggestions = allExercises.values.expand((exercises) => exercises).toList();
     if (query.isNotEmpty && exercises.isEmpty) {
       suggestions =
           getSuggestionsFrom(allExercises[widget.title.toLowerCase()]!, query);
@@ -303,3 +303,4 @@ class _GroupExercisesScreenState extends State<GroupExercisesScreen> {
     setState(() => exercises = suggestions);
   }
 }
+
