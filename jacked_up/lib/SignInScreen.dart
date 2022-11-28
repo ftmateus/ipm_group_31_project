@@ -132,49 +132,30 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   createAnAccontText() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextButton(
-            onPressed: () {},
-            child: Text(
-              'Don\'t have an account? ',
-              style: TextStyle(fontSize: 18),
-            )),
-        TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const RegisterScreen()),
-              );
-            },
-            child: Text("Sign Up", style: TextStyle(fontSize: 18)))
-      ],
+    return RichText(
+      text: TextSpan(
+          children: [
+        const TextSpan(
+          text: 'Don\'t have an account? ',
+          style: TextStyle(
+            color: Colors.white60,
+          ),
+        ),
+        TextSpan(
+            text: 'Sign up',
+            style: const TextStyle(
+              color: Colors.blue,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterScreen()),
+                );
+              }),
+      ]),
     );
-    // );return RichText(
-    //   text: TextSpan(
-    //       children: [
-    //     const TextSpan(
-    //       text: 'Don\'t have an account? ',
-    //       style: TextStyle(
-    //         color: Colors.blue,
-    //       ),
-    //     ),
-    //     TextSpan(
-    //         text: 'Sign up',
-    //         style: const TextStyle(
-    //           color: Colors.blue,
-    //         ),
-    //         recognizer: TapGestureRecognizer()
-    //           ..onTap = () {
-    //             Navigator.push(
-    //               context,
-    //               MaterialPageRoute(
-    //                   builder: (context) => const RegisterScreen()),
-    //             );
-    //           }),
-    //   ]),
-    // );
   }
 
   @override

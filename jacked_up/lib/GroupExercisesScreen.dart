@@ -26,20 +26,20 @@ class _ExerciseTileState extends State<ExerciseTile> {
 
     return Card(
       shape: RoundedRectangleBorder(
-          side: BorderSide(width: 2.0),
+          side: BorderSide(width: 2.0, color: Colors.white60),
           borderRadius: BorderRadius.circular(12)),
       elevation: 3,
       color: Colors.black38,
       child: Row(
         children: [
           Expanded(
-            flex: 30,
+            flex: 25,
             child: Container(
               clipBehavior: Clip.antiAlias,
               height: 100,
               width: MediaQuery.of(context).size.width * 0.25,
               decoration: BoxDecoration(
-                border: Border.all(width: 2),
+                border: Border.all(width: 2, color: Colors.white60),
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
                     image: AssetImage(
@@ -57,7 +57,7 @@ class _ExerciseTileState extends State<ExerciseTile> {
                       Text(
                         widget.exercise.name,
                         style: const TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -101,12 +101,13 @@ class _ExerciseTileState extends State<ExerciseTile> {
                     ]),
           ),
           Expanded(
-              flex: 10,
+              flex: 15,
               child: Container(
                 height: 90,
                 alignment: Alignment.topCenter,
                 child: Column(
                   children: [
+                    const Padding(padding: EdgeInsets.only(top: 5, left: 10)),
                     InkWell(
                         onTap: () {
                           setState(() {
@@ -114,16 +115,14 @@ class _ExerciseTileState extends State<ExerciseTile> {
                           });
                         },
                         child: widget.exercise.isFav
-                            ? const Icon(Icons.star)
+                            ? const Icon(Icons.star, color: Colors.yellow)
                             : const Icon(Icons.star_outline)),
-                    Spacer(),
+                    const Spacer(),
                     viewOnly
                         ? Container()
                         : IconButton(
                             onPressed: () => _showRepSetInput(widget.exercise),
-                            icon: const Icon(
-                              Icons.add_circle,
-                            ))
+                            icon: const Icon(Icons.add_circle, size: 35,))
                   ],
                 ),
               ))
@@ -217,7 +216,8 @@ class _GroupExercisesScreenState extends State<GroupExercisesScreen> {
         backgroundColor: Colors.blue,
       ),
       appBar: AppBar(
-        title: Center(child: Text(widget.title)),
+        title: Text(widget.title),
+        centerTitle: true,
         actions: [new Container()],
       ),
       body: Center(
@@ -293,7 +293,7 @@ class _GroupExercisesScreenState extends State<GroupExercisesScreen> {
   }
 
   void _searchExercise(String query) {
-    List<Exercise> suggestions = allExercises[widget.title.toLowerCase()]!;
+    List<Exercise> suggestions = allExercises.values.expand((exercises) => exercises).toList();
     if (query.isNotEmpty && exercises.isEmpty) {
       suggestions =
           getSuggestionsFrom(allExercises[widget.title.toLowerCase()]!, query);
@@ -303,3 +303,4 @@ class _GroupExercisesScreenState extends State<GroupExercisesScreen> {
     setState(() => exercises = suggestions);
   }
 }
+

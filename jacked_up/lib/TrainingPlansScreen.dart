@@ -19,23 +19,23 @@ class _TrainingPlanTileState extends State<TrainingPlanTile> {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-          side: BorderSide(width: 2.0),
+          side: const BorderSide(width: 2.0, color: Colors.white),
           borderRadius: BorderRadius.circular(12)),
       elevation: 3,
       color: Colors.black38,
       child: Row(
         children: [
           Expanded(
-            flex: 30,
+            flex: 20,
             child: Container(
               clipBehavior: Clip.antiAlias,
-              height: 100,
+              height: 80,
               width: MediaQuery.of(context).size.width * 0.25,
               decoration: BoxDecoration(
-                border: Border.all(width: 2),
+                border: Border.all(width: 2, color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(Icons.ac_unit_rounded),
+              child: Icon(Icons.fitness_center, size: 50,),
             ),
           ),
           Expanded(
@@ -46,7 +46,7 @@ class _TrainingPlanTileState extends State<TrainingPlanTile> {
                   Text(
                     widget.trainingPlan.name,
                     style: const TextStyle(
-                      fontSize: 12.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -120,7 +120,8 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
         backgroundColor: Colors.blue,
       ),
       appBar: AppBar(
-        title: Center(child: Text('Training Plans')),
+        title:Text('Training Plans'),
+        centerTitle: true,
         actions: [new Container()],
       ),
       body: Center(
@@ -188,6 +189,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
                         ),
                       ),
                     ),
+
                   ),
             Expanded(
                 child: Padding(
