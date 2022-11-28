@@ -114,7 +114,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool viewOnly = ModalRoute.of(context)?.settings.arguments as bool;
+    bool viewOnly = ModalRoute.of(context)?.settings.arguments != null;
     return Scaffold(
       endDrawer: Drawer(
         backgroundColor: Colors.blue,
