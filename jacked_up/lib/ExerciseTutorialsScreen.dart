@@ -72,7 +72,7 @@ class _ExerciseTutorialsScreenState extends State<ExerciseTutorialsScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          title: Text('Exercises'),
+          title: const Text('Exercises'),
           centerTitle: true,
         ),
         body: Column(

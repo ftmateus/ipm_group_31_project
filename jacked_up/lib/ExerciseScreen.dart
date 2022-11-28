@@ -15,11 +15,11 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Center(child: Text("View Exercise"))),
+        appBar: AppBar(title: const Text("View Exercise"), centerTitle: true,),
         body: Column(
           children: [
             Expanded(
-              flex: 45,
+              flex:25,
               child: Row(
                 children: [
                   Expanded(
@@ -28,7 +28,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(widget.exercise.imagePaths[0])),
-                      border: Border.all(width: 7),
+                      border: Border.all(width: 3, color: Colors.white60),
                       borderRadius: BorderRadius.circular(10), //<-- SEE HERE
                     ),
                   )),
@@ -37,7 +37,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(24, 77, 0, 22),
+                        padding: EdgeInsets.only(left: 24, top: 30),
                         child: Text("Exercise name: ",
                             style: TextStyle(
                               fontSize: 12.0,
@@ -45,7 +45,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                             )),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(55, 12, 0, 12),
+                        padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
                         child: Text(
                           widget.exercise.name,
                           style: const TextStyle(
@@ -53,7 +53,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(24, 22, 0, 12),
+                        padding: EdgeInsets.only(left: 24),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: List<Widget>.of([
@@ -101,6 +101,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const Padding(padding: EdgeInsets.only(top:10)),
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
