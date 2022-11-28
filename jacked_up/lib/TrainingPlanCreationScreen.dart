@@ -267,7 +267,7 @@ class _TrainingPlanCreationScreenState
               builder: (context) => const ExerciseTutorialsScreen(
                 title: 'Choose Exercise',
               ),
-            settings: const RouteSettings(arguments: false)
+            //settings: const RouteSettings(arguments: true)
           ),
         ).then((exerciseExecution) {
           setState(() {
@@ -275,6 +275,9 @@ class _TrainingPlanCreationScreenState
           });
         }),
         child: const Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        elevation: 3,
       ),
     );
   }

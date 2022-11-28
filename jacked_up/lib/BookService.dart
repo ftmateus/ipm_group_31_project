@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jacked_up/MainMenu.dart';
+import 'package:jacked_up/Services.dart';
 
 import 'MenuOptions.dart';
 
@@ -119,7 +120,7 @@ class Services extends StatefulWidget {
 
 class _ServicesState extends State<Services> {
 
-  final reservations = <Pair<DateTime, String>>[];
+  final reservations = bookedServices;
 
   @override
   Widget build(BuildContext context) {

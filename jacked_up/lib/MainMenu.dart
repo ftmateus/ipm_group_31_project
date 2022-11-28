@@ -93,6 +93,7 @@ class _MainMenuState extends State<MainMenu> {
         width: 80,
         height: 80,
         child: FloatingActionButton(
+          backgroundColor: Colors.white,
           onPressed: () => {
             Navigator.push(
                 context,
@@ -104,7 +105,7 @@ class _MainMenuState extends State<MainMenu> {
                 ))
           },
           tooltip: 'Today\'s Plan',
-          child: const Icon(Icons.play_arrow, size: 50),
+          child: const Icon(Icons.play_arrow, size: 50, color: Colors.blueAccent,),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

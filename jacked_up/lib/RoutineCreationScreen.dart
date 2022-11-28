@@ -31,7 +31,7 @@ class _TrainingPlanTileState extends State<TrainingPlanTile>{
           child: Container(
             height: 50,
             decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.red),
+                border: Border.all(width: 2, color: Colors.blue),
                 borderRadius: BorderRadius.all(Radius.circular(12))
             ),
             child: Center(
