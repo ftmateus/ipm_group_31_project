@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jacked_up/MainMenu.dart';
+
+import 'MenuOptions.dart';
 
 // void main() {
 //   runApp(const BookService());
@@ -26,6 +29,87 @@ class Pair<T1, T2> {
 //   }
 // }
 
+final services = [
+  Pair("HIIT", "assets/images/HIIT.png"),
+  Pair("Zumba", "assets/images/zumba-class.jpg"),
+  Pair("Cycling", "assets/images/cycling.jpg"),
+  Pair("Pilates", "assets/images/pilates.png"),
+  Pair("Body Pump", "assets/images/body_pump.jpg"),
+  Pair("Yoga", "assets/images/yoga.jpg"),
+  // "Campo C": "",
+  // "Campo D": "",
+];
+
+class ServiceCard extends StatelessWidget
+{
+  const ServiceCard({
+    super.key,
+    required this.title,
+    required this.image,
+    required this.onPress
+  });
+
+  final String image;
+  final String title;
+  final void Function() onPress;
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    // return Card(
+    //     shape: const RoundedRectangleBorder(
+    //       side: BorderSide(
+    //         color: Colors.black45,
+    //       ),
+    //       borderRadius: BorderRadius.all(Radius.circular(12)),
+    //     ),
+    //     color: Theme.of(context).colorScheme.surfaceVariant,
+    //     child: ListTile(
+    //         shape: const RoundedRectangleBorder(
+    //           borderRadius: BorderRadius.all(Radius.circular(12)),
+    //         ),
+    //         contentPadding: const EdgeInsets.only(
+    //             left: 20, top: 5, bottom: 5),
+    //         onTap: onPress,
+    //         title: Text(title),
+    //         leading:
+    //             const Icon(Icons.arrow_circle_right, size: 25)
+    //     )
+    // );
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          image: DecorationImage(
+            image: AssetImage(image),
+            fit: BoxFit.fitWidth
+          ),
+          shape: BoxShape.rectangle
+      ),
+      width: 1,
+      child: Material(
+          color: Colors.black.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(30),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(30),
+            splashColor: Colors.amberAccent.withAlpha(80),
+            onTap: onPress,
+            child: Center(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
+                )
+            ),
+          )
+      ),
+    );
+  }
+}
+
 class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);
 
@@ -34,79 +118,78 @@ class Services extends StatefulWidget {
 }
 
 class _ServicesState extends State<Services> {
-  final titles = [
-    "Campo A",
-    "Campo B",
-    "Campo C",
-    "Campo D",
-    "Zumba",
-    "Cycling",
-    "Pilate",
-    "Body Pump"
-  ];
 
   final reservations = <Pair<DateTime, String>>[];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
-        title: const Center(
-          child: Text('Book Services'),
-        ),
-        backgroundColor: Colors.orange,
-        centerTitle: true,
-        leading: BackButton(
-            color: Colors.white,
-          onPressed: () {
-              Navigator.pop(context);
-          },
-        ),
+
+        title: Text('Book Services'),
+        backgroundColor: const Color.fromRGBO(85, 122, 250, 1).withAlpha(200),
+        centerTitle: true
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
           Widget>[
         const Padding(
             padding: EdgeInsets.only(left: 20, top: 20, bottom: 5),
             child: Text('Available Services:',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white))),
         Expanded(
-            child: ListView.builder(
-                padding: const EdgeInsets.all(8.0),
-                itemCount: titles.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                      shape: const RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.black45,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                      ),
-                      color: Theme.of(context).colorScheme.surfaceVariant,
-                      child: ListTile(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
-                          ),
-                          contentPadding: const EdgeInsets.only(
-                              left: 20, top: 5, bottom: 5),
-                          onTap: () async {
-                            final date = await _showReservationPicker(
-                                context, titles[index]);
-                            if (date == null) return;
-                            setState(() =>
-                                reservations.add(Pair(date, titles[index])));
-                          },
-                          title: Text(titles[index]),
-                          leading:
-                              const Icon(Icons.arrow_circle_right, size: 25)));
-                }))
+            child: GridView.count(
+                      primary: false,
+                      padding: const EdgeInsets.all(20),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 2.5,
+                      crossAxisCount: 1,
+                      children: services.map((service) =>
+                          ServiceCard(
+                            title: service.a,
+                            image: service.b,
+                            onPress: () async {
+                              final date = await _showReservationPicker(
+                                  context, service.a);
+                              if (date == null) return;
+                              setState(() =>
+                                  reservations.add(Pair(date, service.a))
+                              );
+                            })
+                      ).toList(),
+
+                  // return Card(
+                  //     shape: const RoundedRectangleBorder(
+                  //       side: BorderSide(
+                  //         color: Colors.black45,
+                  //       ),
+                  //       borderRadius: BorderRadius.all(Radius.circular(12)),
+                  //     ),
+                  //     color: Theme.of(context).colorScheme.surfaceVariant,
+                  //     child: ListTile(
+                  //         shape: const RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(12)),
+                  //         ),
+                  //         contentPadding: const EdgeInsets.only(
+                  //             left: 20, top: 5, bottom: 5),
+                  //         onTap: () async {
+                  //           final date = await _showReservationPicker(
+                  //               context, titles[index]);
+                  //           if (date == null) return;
+                  //           setState(() =>
+                  //               reservations.add(Pair(date, titles[index])));
+                  //         },
+                  //         title: Text(titles[index]),
+                  //         leading:
+                  //             const Icon(Icons.arrow_circle_right, size: 25)));
+                ))
       ]),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _showReservations,
         label: const Text('Reservations'),
         tooltip: 'Your Bookings',
         icon: const Icon(Icons.description),
-        backgroundColor: Colors.orange,
+        backgroundColor: const Color.fromRGBO(85, 122, 250, 1).withAlpha(200),
       ),
     );
   }
@@ -180,7 +263,7 @@ Future<DateTime?> _showReservationPicker(
                   const SizedBox(height: 10),
                   TextButton.icon(
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
+                      foregroundColor: Colors.white,
                       textStyle: const TextStyle(fontSize: 20),
                       side: const BorderSide(
                         color: Colors.black45,
@@ -227,9 +310,7 @@ Future<DateTime?> _showReservationPicker(
               TextButton(
                 onPressed: () => Navigator.pop(context, null),
                 child: const Text('Cancel'),
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.red,
-                ),
+
               ),
               TextButton(
                   onPressed: () {
@@ -255,7 +336,6 @@ Future<DateTime?> _showReservationPicker(
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.orange,
                     textStyle: const TextStyle(fontWeight: FontWeight.bold)
                   ),
                   child: const Text('Book'))
