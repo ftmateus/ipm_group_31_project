@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'SignInScreen.dart';
+
 // class ProfilePage extends StatelessWidget {
 //   const ProfilePage({super.key});
 //
@@ -15,7 +17,9 @@ import 'package:flutter/material.dart';
 // }
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({super.key, required this.user});
+
+  final UserInfo user;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -35,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     radius: 72,
                     backgroundImage: AssetImage("assets/images/fctense_profile_picture.png"),
                   ),
-                  const Text("FCTense",
+                  Text(widget.user.username,
                     style: TextStyle(
                         fontSize: 42,
                         color: Colors.white
@@ -59,14 +63,14 @@ class _ProfilePageState extends State<ProfilePage> {
             Row(
               children: [
                 Column(
-                  children: const [
+                  children: [
                     Text("Weight",
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.white
                       ),
                     ),
-                    Text("47kg",
+                    Text(widget.user.weight.toString() + " kg",
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.white
@@ -85,13 +89,13 @@ class _ProfilePageState extends State<ProfilePage> {
             Row(
               children: [
                 Column(
-                  children: const [
+                  children: [
                     Text("Height",
                       style: TextStyle(
                           fontSize: 20,
                       ),
                     ),
-                    Text("1,62m",
+                    Text(widget.user.height.toString() + " cm",
                       style: TextStyle(
                           fontSize: 20,
                       ),
@@ -112,56 +116,64 @@ class _ProfilePageState extends State<ProfilePage> {
           child: null,
         ),
         Container(
-          width: 400,
-          height: 200,
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: 300,
           child: Material(
             borderRadius: BorderRadius.circular(30),
-            color:  Theme.of(context).colorScheme.primary,
+            color:  Theme.of(context).colorScheme.primary.withOpacity(0.7),
             child: Column(
               children: [
-                const Text("My Body",
+                const Padding(padding: EdgeInsets.all(10)),
+                Icon(Icons.accessibility_new_rounded, size: 50, color: Colors.white),
+                const Text("MY BODY",
                   style: TextStyle(
-                    fontSize: 50
+                    color: Colors.lightGreenAccent,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
+                const Padding(padding: EdgeInsets.all(10)),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width : 200,
+                      width : 150,
                       child: Text("BMI",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 25,
+                              fontWeight: FontWeight.bold
                           ),
                         ),
                     ),
+                    const Padding(padding: EdgeInsets.all(10)),
                     Container(
-                      width : 200,
-                      child: Text("Body fat %",
+                      width : 150,
+                      child: Text("Body Fat %",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 25,
-
+                            fontWeight: FontWeight.bold
                         ),
                       ),
                     )
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width : 200,
-                      child: Text("17,69\nThinness",
+                      width : 150,
+                      child: Text("17,69",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
                         ),
                       ),
                     ),
+                    const Padding(padding: EdgeInsets.all(10)),
                     Container(
-                      width : 200,
+                      width : 150,
                       child: Text("17.5%",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -172,7 +184,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     )
                   ],
                 ),
-                Text("Ideal Weight", style: TextStyle(fontSize: 30)),
+                const Padding(padding: EdgeInsets.all(10)),
+                Text("Ideal Weight",
+                    style: TextStyle(fontSize: 30,
+                    fontWeight: FontWeight.bold
+                  )
+                ),
                 Text("49,2-66,2Kg", style: TextStyle(fontSize: 20))
               ],
             ),
@@ -209,10 +226,10 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Icon(Icons.settings),
+                Icon(Icons.settings, size: 30),
                 const Text("Settings",
                   style: TextStyle(
-                      fontSize: 40
+                      fontSize: 30
                   ),
                 )
               ],

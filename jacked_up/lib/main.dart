@@ -15,7 +15,15 @@ class Home extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         //theme: ,
         home: ExerciseTutorialsScreen());*/
-    UserInfo defaultUser = UserInfo('email', 'Joao', 'Barros');
+    UserInfo defaultUser = UserInfo(
+        'email',
+        'admin',
+        'admin',
+        DateTime.now(),
+        Gender.male,
+        170,
+        75
+    );
     return  MaterialApp(
         darkTheme: ThemeData(
           scaffoldBackgroundColor: Colors.black54,
@@ -40,9 +48,11 @@ class Home extends StatelessWidget {
           // Define the default `TextTheme`. Use this to specify the default
           // text styling for headlines, titles, bodies of text, and more.
           textTheme: const TextTheme(
-            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            // headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            // headline2: TextStyle(fontSize: 62.0, fontWeight: FontWeight.normal),
+            // headline3: TextStyle(fontSize: 48.0, fontWeight: FontWeight.normal),
             headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.normal),
-            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+            // bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
           ),
         ),
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jacked_up/ExerciseScreen.dart';
+import 'package:jacked_up/ExerciseTutorialsScreen.dart';
 
 import 'BookService.dart';
 
@@ -26,7 +28,7 @@ class MenuOption extends StatelessWidget
           )
       ),
       child: Material(
-          color: Colors.black.withOpacity(0.4),
+          color: Colors.black.withOpacity(0.6),
           borderRadius: BorderRadius.circular(30),
           child: InkWell(
             borderRadius: BorderRadius.circular(30),
@@ -87,7 +89,12 @@ class MenuOptions extends StatelessWidget
             MenuOption(
                 title: "Exercises Tutorials",
                 image: 'assets/images/exercises_main_menu_icon.jpg',
-                onPress: () {}
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ExerciseTutorialsScreen()),
+                  );
+                }
             ),
             // MenuOption(
             //     title: "Settings",

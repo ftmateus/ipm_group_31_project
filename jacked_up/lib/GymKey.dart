@@ -43,7 +43,7 @@ class GymKey extends StatelessWidget
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Text("Parking: "),
-                    Text(""),
+                    Text("75%"),
                   ],
                 )
               ],

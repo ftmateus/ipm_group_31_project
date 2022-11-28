@@ -71,10 +71,9 @@ class _ExerciseTutorialsScreenState extends State<ExerciseTutorialsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.red,
-          title: Center(
-            child: Text(widget.title),
-          ),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Text('Exercises'),
+          centerTitle: true,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

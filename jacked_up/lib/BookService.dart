@@ -82,13 +82,13 @@ class ServiceCard extends StatelessWidget
           borderRadius: BorderRadius.circular(30),
           image: DecorationImage(
             image: AssetImage(image),
-            fit: BoxFit.fill
+            fit: BoxFit.fitWidth
           ),
           shape: BoxShape.rectangle
       ),
       width: 1,
       child: Material(
-          color: Colors.black.withOpacity(0.4),
+          color: Colors.black.withOpacity(0.6),
           borderRadius: BorderRadius.circular(30),
           child: InkWell(
             borderRadius: BorderRadius.circular(30),
@@ -125,17 +125,10 @@ class _ServicesState extends State<Services> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text('Book Services'),
-        ),
+
+        title: Text('Book Services'),
         backgroundColor: const Color.fromRGBO(85, 122, 250, 1).withAlpha(200),
-        centerTitle: true,
-        leading: BackButton(
-            color: Colors.white,
-          onPressed: () {
-              Navigator.pop(context);
-          },
-        ),
+        centerTitle: true
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
           Widget>[

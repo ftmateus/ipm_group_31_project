@@ -30,19 +30,18 @@ class _MessagePMState extends State<MessagePM> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 25,
-                  backgroundImage: AssetImage("assets/images/pt_profile_picture.png"),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 15),
-                  child: Text('João Santos'),
-                )
-              ],
-            ),
+          centerTitle: true,
+          title: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundImage: AssetImage("assets/images/pt_profile_picture.png"),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 15),
+                child: Text('João Santos'),
+              )
+            ],
           ),
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
@@ -50,7 +49,7 @@ class _MessagePMState extends State<MessagePM> {
           child: Column(
             children: [
               Container(
-                height: 655,
+                height: MediaQuery.of(context).size.height * 0.8,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   reverse: true,
@@ -66,8 +65,8 @@ class _MessagePMState extends State<MessagePM> {
               ),
               Row(
                 children: [
-                  Container(
-                    width: 350,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.85,
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -83,7 +82,7 @@ class _MessagePMState extends State<MessagePM> {
                           _message.clear();
                         });
                       },
-                      icon: Icon(Icons.send, size: 40)
+                      icon: Icon(Icons.send, size: MediaQuery.of(context).size.width * 0.10)
                   )
                 ],
               )

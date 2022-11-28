@@ -17,10 +17,10 @@ class UserInfo {
   final DateTime? birthdate;
   final Gender? gender;
   final int? height;
-  final int? width;
+  final double? weight;
 
   UserInfo(this.email, this.username, this.password, [this.birthdate,
-      this.gender, this.height, this.width]);
+      this.gender, this.height, this.weight]);
 }
 
 
@@ -100,7 +100,7 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  signInButton() {
+  signInButton(void Function() onPressed) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: Stack(
@@ -124,18 +124,7 @@ class _SignInScreenState extends State<SignInScreen> {
               minimumSize: const Size(130, 40),
               textStyle: const TextStyle(fontSize: 20),
             ),
-            onPressed: () {
-              setState(() {
-                users.add(widget.userInfo);
-              });
-
-              if (_formKey.currentState!.validate()) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MainMenu())
-                );
-              }
-            },
+            onPressed: onPressed,
             child: const Text('Sign In'),
           ),
         ],
@@ -192,7 +181,18 @@ class _SignInScreenState extends State<SignInScreen> {
                     userNameField(),
                     passwordField(),
                     const SizedBox(height: 30),
-                  signInButton(),
+                  signInButton(() {
+                    setState(() {
+                      users.add(widget.userInfo);
+                    });
+
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MainMenu(userInfo: users.first))
+                      );
+                    }
+                  },),
               ],
             ),
           ),

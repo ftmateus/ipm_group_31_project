@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:jacked_up/ProfilePage.dart';
 
+import 'SignInScreen.dart';
+
 class ProfileButton extends StatelessWidget
 {
   const ProfileButton({
     super.key,
     required this.index,
     required this.onPress,
+    required this.user
   });
 
+  final UserInfo user;
   final int index;
   final void Function() onPress;
 
@@ -32,7 +36,7 @@ class ProfileButton extends StatelessWidget
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage())
+                MaterialPageRoute(builder: (context) => ProfilePage(user: user))
               );
             },
             child: Container(
@@ -44,8 +48,8 @@ class ProfileButton extends StatelessWidget
                         radius: 48,
                         backgroundImage: AssetImage("assets/images/fctense_profile_picture.png"),
                       ), // const Icon(Icons.person, size: 80),
-                      const Text(
-                        "Welcome FCTense",
+                      Text(
+                        "Welcome " + user.username,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
@@ -55,15 +59,15 @@ class ProfileButton extends StatelessWidget
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Column(
-                            children: const [
+                            children: [
                               Text("Weight"),
-                              Text("47kg")
+                              Text(user.weight.toString() + " Kg")
                             ],
                           ),
                           Column(
-                            children: const [
+                            children: [
                               Text("Height"),
-                              Text("1,62m")
+                              Text(user.height.toString() + " m")
                             ],
                           ),
                         ],

@@ -157,7 +157,7 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
                 var oldInfo = widget.userInfo;
                 var newInfo = UserInfo(oldInfo.email, oldInfo.username,
                     oldInfo.password, dateTime, _gender, int.parse(_height.text),
-                    int.parse(_weight.text));
+                    double.parse(_weight.text));
                     Navigator.pushAndRemoveUntil(context,
                     MaterialPageRoute(builder: (context) =>
                         SignInScreen(userInfo: newInfo)), (route) => false);
