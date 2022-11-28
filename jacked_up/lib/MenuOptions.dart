@@ -98,7 +98,10 @@ class MenuOptions extends StatelessWidget
                 onPress: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ExerciseTutorialsScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const ExerciseTutorialsScreen(),
+                      settings: const RouteSettings(arguments: true)
+                    ),
                   );
                 }
             ),
