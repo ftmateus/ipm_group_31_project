@@ -40,7 +40,7 @@ class MenuOption extends StatelessWidget
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 40,
+                    fontSize: 32,
                   ),
                 )
             ),

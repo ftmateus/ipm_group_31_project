@@ -77,7 +77,7 @@ class _MainMenuState extends State<MainMenu> {
         height: 80,
         child: FloatingActionButton(
           onPressed: () => setState(() {}),
-          tooltip: 'Increment Counter',
+          tooltip: 'Today\'s training plan',
           child: const Icon(Icons.play_arrow, size: 50),
         ),
       ),

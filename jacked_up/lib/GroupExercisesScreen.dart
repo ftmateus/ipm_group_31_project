@@ -22,7 +22,7 @@ class _ExerciseTileState extends State<ExerciseTile> {
 
   @override
   Widget build(BuildContext context) {
-    bool viewOnly  = ModalRoute.of(context)!.settings.arguments as bool;
+    bool viewOnly  = ModalRoute.of(context)!.settings.arguments != null;
 
     return Card(
       shape: RoundedRectangleBorder(

@@ -19,13 +19,12 @@ class UserInfo {
   final int? height;
   final double? weight;
 
-  UserInfo(this.email, this.username, this.password, [this.birthdate,
-      this.gender, this.height, this.weight]);
+  UserInfo(this.email, this.username, this.password,
+      [this.birthdate, this.gender, this.height, this.weight]);
 }
 
-
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key,  required this.userInfo});
+  const SignInScreen({super.key, required this.userInfo});
   final UserInfo userInfo;
 
   @override
@@ -39,21 +38,21 @@ class _SignInScreenState extends State<SignInScreen> {
 
   List<UserInfo> users = <UserInfo>[];
 
-  bool userNameExists(String userName){
-    bool found= false;
-    for(final user in users){
-      if(user.username==userName){
-        found=true;
+  bool userNameExists(String userName) {
+    bool found = false;
+    for (final user in users) {
+      if (user.username == userName) {
+        found = true;
       }
     }
     return found;
   }
 
-  bool rightPassword(String pass, String userName){
-    bool found= false;
-    for(final user in users){
-      if(user.username==userName){
-        if(user.password==pass){
+  bool rightPassword(String pass, String userName) {
+    bool found = false;
+    for (final user in users) {
+      if (user.username == userName) {
+        if (user.password == pass) {
           found = true;
         }
       }
@@ -72,7 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please enter an username';
-        }else if(!userNameExists(value)){
+        } else if (!userNameExists(value)) {
           return 'User does not exist';
         }
         return null;
@@ -92,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
       validator: (String? value) {
         if (value == null || value.isEmpty) {
           return 'Please enter a password';
-        }else if (!rightPassword(value, _username.text)){
+        } else if (!rightPassword(value, _username.text)) {
           return 'Wrong password!';
         }
         return null;
@@ -133,28 +132,49 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   createAnAccontText() {
-    return RichText(
-      text: TextSpan(children: [
-        const TextSpan(
-          text: 'Don\'t have an account? ',
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        TextSpan(
-            text: 'Sign up',
-            style: const TextStyle(
-              color: Colors.blue,
-            ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RegisterScreen()),
-                );
-              }),
-      ]),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+            onPressed: () {},
+            child: Text(
+              'Don\'t have an account? ',
+              style: TextStyle(fontSize: 18),
+            )),
+        TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const RegisterScreen()),
+              );
+            },
+            child: Text("Sign Up", style: TextStyle(fontSize: 18)))
+      ],
     );
+    // );return RichText(
+    //   text: TextSpan(
+    //       children: [
+    //     const TextSpan(
+    //       text: 'Don\'t have an account? ',
+    //       style: TextStyle(
+    //         color: Colors.blue,
+    //       ),
+    //     ),
+    //     TextSpan(
+    //         text: 'Sign up',
+    //         style: const TextStyle(
+    //           color: Colors.blue,
+    //         ),
+    //         recognizer: TapGestureRecognizer()
+    //           ..onTap = () {
+    //             Navigator.push(
+    //               context,
+    //               MaterialPageRoute(
+    //                   builder: (context) => const RegisterScreen()),
+    //             );
+    //           }),
+    //   ]),
+    // );
   }
 
   @override
@@ -163,25 +183,26 @@ class _SignInScreenState extends State<SignInScreen> {
         //backgroundColor: Colors.black,
         body: Center(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-              const Expanded(
-                child: Image(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        const Expanded(
+            child: Image(
                 image: AssetImage('assets/images/jackedUp.png'),
                 fit: BoxFit.cover,
                 width: double.infinity)),
-              Form(
-                key: _formKey,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                    userNameField(),
-                    passwordField(),
-                    const SizedBox(height: 30),
-                  signInButton(() {
+        Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                userNameField(),
+                passwordField(),
+                const SizedBox(height: 30),
+                signInButton(
+                  () {
                     setState(() {
                       users.add(widget.userInfo);
                     });
@@ -189,17 +210,19 @@ class _SignInScreenState extends State<SignInScreen> {
                     if (_formKey.currentState!.validate()) {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MainMenu(userInfo: users.first))
-                      );
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  MainMenu(userInfo: users.first)));
                     }
-                  },),
+                  },
+                ),
               ],
             ),
           ),
         ),
-              const SizedBox(height: 15),
-              createAnAccontText(),
-              const SizedBox(height: 20),
+        const SizedBox(height: 15),
+        createAnAccontText(),
+        const SizedBox(height: 20),
       ],
     )));
   }

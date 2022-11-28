@@ -29,7 +29,6 @@ class _RegisterScreenSecondState extends State<RegisterScreenSecond> {
         const SizedBox(width: 15),
         TextButton.icon(
           style: TextButton.styleFrom(
-            foregroundColor: Colors.black,
             textStyle: const TextStyle(fontSize: 18),
             side: const BorderSide(
               color: Colors.black45,

@@ -57,7 +57,7 @@ class ExerciseGroupButton extends StatelessWidget {
 }
 
 class ExerciseTutorialsScreen extends StatefulWidget {
-  const ExerciseTutorialsScreen({Key? key, required this.title}) : super(key: key);
+  const ExerciseTutorialsScreen({Key? key, this.title = "Exercise Tutorials"}) : super(key: key);
 
   final String title;
 
