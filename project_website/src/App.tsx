@@ -225,6 +225,39 @@ function App() {
           } */}
           </ProjectContainer>
           &nbsp;
+          <ProjectContainer name="Stage 4: Computational Prototype" pdfUrl={process.env.PUBLIC_URL + "/stage4_report.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          <ProjectContainer name="Stage 5: Heuristic Evaluation" pdfUrl={process.env.PUBLIC_URL + "/stage5_report.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
+          <ProjectContainer name="Stage 6: Evaluation Results" pdfUrl={process.env.PUBLIC_URL + "/stage6_report.pdf"}>
+          {/* {
+            () => <iframe
+              src={process.env.PUBLIC_URL + "/stage1_report.pdf"}
+              width="100%"
+              height="500px"
+              style={{position : "relative"}}
+              ></iframe>
+          } */}
+          </ProjectContainer>
+          &nbsp;
         </div>
         
       </div>
